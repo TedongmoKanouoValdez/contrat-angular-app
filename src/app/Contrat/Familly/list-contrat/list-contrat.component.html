@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="title">
+    <h1>Liste des familles</h1>
+  </div>
+    <button class="btn-add" (click)="goToAddFamille()">Ajouter une famille</button>
+
+</div>
+
+<section class="custom-section">
+  <form>
+    <input
+      class="filter"
+      type="text"
+      placeholder="Filtrer par nom de famille"
+    />
+    <button class="btn-Appliquer" type="button">Appliquer</button>
+  </form>
+  <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+    <thead sorted responsive class="">
+      <tr>
+        <th>Nom</th>
+        <!-- <th style="text-align: right;">Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">name</td>
+        <td
+          style="
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          "
+        >
+          <i
+            class="fas fa-pen"
+            style="
+              font-size: 24px;
+              color: rgb(55, 156, 196);
+              margin-right: 10px;
+              padding: 10px;
+            "
+          ></i>
+          <i
+            class="far fa-trash-alt"
+            style="font-size: 24px; color: rgb(55, 156, 196)"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td scope="row">name</td>
+        <td
+          style="
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          "
+        >
+          <i
+            class="fas fa-pen"
+            style="
+              font-size: 24px;
+              color: rgb(55, 156, 196);
+              margin-right: 10px;
+              padding: 10px;
+            "
+          ></i>
+          <i
+            class="far fa-trash-alt"
+            style="font-size: 24px; color: rgb(55, 156, 196)"
+          ></i>
+        </td>
+      </tr>
+      <tr>
+        <td scope="row">name</td>
+        <td
+          style="
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          "
+        >
+          <i
+            class="fas fa-pen"
+            style="
+              font-size: 24px;
+              color: rgb(55, 156, 196);
+              margin-right: 10px;
+              padding: 10px;
+            "
+          ></i>
+          <i
+            class="far fa-trash-alt"
+            style="font-size: 24px; color: rgb(55, 156, 196)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
