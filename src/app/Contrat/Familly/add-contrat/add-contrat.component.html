@@ -27,18 +27,20 @@
         </select>
       </div>
     </div>
+    
     <div class="col">
-      <div class="row">
-        <div class="col">
-          <span>Famille</span>
+        <div class="row">
+          <div class="col">
+            <span>Famille</span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" style="width: 200%" />
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" [(ngModel)]="familleName" style="width: 200%" />
+          </div>
         </div>
-      </div>
     </div>
+      
   </div>
   <hr style="margin-top: 25%; margin-left: 8%; margin-right: 8%" />
 
@@ -47,8 +49,10 @@
         <button (click)="goToListFamille()">Annuler</button>
     </div>
     <div class="col" style="padding-left: 55%;">
-        <button (click)="goToListFamille()">Ajouter</button>
+        <button (click)="createdFamilly()">Ajouter</button>
     </div>
 </div>
 
 </section>
+
+

@@ -1,3 +1,5 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 <div class="row">
   <div class="title">
     <h1>Liste des familles</h1>
@@ -9,95 +11,125 @@
 <section class="custom-section">
   <form>
     <input
+      [(ngModel)]="famillyName"
+      name="famillyName"
+      (keyup.enter)="searchFamillyByName()"
       class="filter"
       type="text"
       placeholder="Filtrer par nom de famille"
     />
-    <button class="btn-Appliquer" type="button">Appliquer</button>
+    <button class="btn-Appliquer" type="button" (click)="searchFamillyByName()">Appliquer</button>
   </form>
   <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
     <thead sorted responsive class="">
       <tr>
         <th>Nom</th>
-        <!-- <th style="text-align: right;">Action</th> -->
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td scope="row">name</td>
-        <td
-          style="
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-          "
-        >
-          <i
-            class="fas fa-pen"
+
+      <!-- affiche le resultat de la requete lorsqu'on effectue une recherche et l'affiche dans la directive ng-container -->
+      <ng-container *ngIf="searchResults && searchResults.length > 0; else showAllResults">
+        <tr *ngFor="let name of searchResults">
+          <td scope="row">{{ name }}</td>
+          <td
             style="
-              font-size: 24px;
-              color: rgb(55, 156, 196);
-              margin-right: 10px;
-              padding: 10px;
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
             "
-          ></i>
-          <i
-            class="far fa-trash-alt"
-            style="font-size: 24px; color: rgb(55, 156, 196)"
-          ></i>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">name</td>
-        <td
-          style="
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-          "
-        >
-          <i
-            class="fas fa-pen"
+          >
+            <i
+              class="fas fa-pen"
+              style="
+                font-size: 24px;
+                color: rgb(55, 156, 196);
+                margin-right: 10px;
+                padding: 10px;
+              "
+              data-bs-toggle="modal"
+            ></i>
+            <i
+              class="far fa-trash-alt"
+              data-bs-toggle="modal" (click)="openModal(content)"
+              style="font-size: 24px; color: rgb(55, 156, 196)"
+            ></i>
+          </td>
+        </tr>
+      </ng-container>
+<!-- affiche tous les resultats lorsque la recherche n'a pas été effectué ou retourne aucun element -->
+      <ng-template #showAllResults>
+        <tr *ngFor="let item of contrats">
+          <td scope="row">{{ item.name }}</td>
+          <td
             style="
-              font-size: 24px;
-              color: rgb(55, 156, 196);
-              margin-right: 10px;
-              padding: 10px;
+              text-align: right;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
             "
-          ></i>
-          <i
-            class="far fa-trash-alt"
-            style="font-size: 24px; color: rgb(55, 156, 196)"
-          ></i>
-        </td>
-      </tr>
-      <tr>
-        <td scope="row">name</td>
-        <td
-          style="
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-          "
-        >
-          <i
-            class="fas fa-pen"
-            style="
-              font-size: 24px;
-              color: rgb(55, 156, 196);
-              margin-right: 10px;
-              padding: 10px;
-            "
-          ></i>
-          <i
-            class="far fa-trash-alt"
-            style="font-size: 24px; color: rgb(55, 156, 196)"
-          ></i>
-        </td>
-      </tr>
+          >
+            <i
+              class="fas fa-pen"
+              style="
+                font-size: 24px;
+                color: rgb(55, 156, 196);
+                margin-right: 10px;
+                padding: 10px;
+              "
+              data-bs-toggle="modal"
+            ></i>
+            <i
+              class="far fa-trash-alt"
+              data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+              style="font-size: 24px; color: rgb(55, 156, 196)"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+
     </tbody>
   </table>
 </section>
+
+
+<!-- Modal -->
+<div  #content class="modal fade" id="btnSupprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->
