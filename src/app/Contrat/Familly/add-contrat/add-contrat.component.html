@@ -36,12 +36,21 @@
         </div>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" [(ngModel)]="familleName" style="width: 200%" />
+            <input type="text" class="form-control" [(ngModel)]="familleName" style="width: 200%"  (keyup.enter)="createdFamilly()" />
+            <div *ngIf="!familleName && familleNameTouched" style="color: red;">Ce champ est requis.</div>
           </div>
         </div>
     </div>
       
   </div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" style="margin-top: 2%; margin-left: 8%; margin-right: 39%" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" style="margin-top: 2%; margin-left: 8%; margin-right: 39%" role="alert">
+    {{ successMessage }}
+  </div>
+
   <hr style="margin-top: 25%; margin-left: 8%; margin-right: 8%" />
 
   <div class="row" style="margin-left: 7%; margin-top: 6%; margin-bottom: 5%;">
@@ -52,6 +61,11 @@
         <button (click)="createdFamilly()">Ajouter</button>
     </div>
 </div>
+
+
+
+
+
 
 </section>
 

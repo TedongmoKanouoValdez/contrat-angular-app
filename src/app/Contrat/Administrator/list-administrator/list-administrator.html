@@ -1,0 +1,61 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<div class="row">
+    <div class="title">
+      <h1>Liste des Administrateurs</h1>
+    </div>
+      <button class="btn-add" >Ajouter un administrateur</button> 
+</div>
+
+<section class="custom-section">
+    <form>
+      <input
+        
+        name="adminData"
+        class="filter"
+        type="text"
+        placeholder="Filtrer par nom,prenom,email"
+      />
+      <button class="btn-Appliquer" type="button">Appliquer</button>
+    </form>
+    <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+      <thead sorted responsive class="">
+        <tr>
+            <th>Nom | Prenom</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let item of admin">
+              <td scope="row">{{ item.firstname }} {{ item.lastname}}</td>
+              <td scope="row">{{ item.email}}</td>
+              <td scope="row">{{ item.phoneNumber}}</td>
+              <td
+                style="
+                  text-align: right;
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-pen"
+                  style="
+                    font-size: 24px;
+                    color: rgb(55, 156, 196);
+                    margin-right: 10px;
+                    padding: 10px;
+                  "
+                  data-bs-toggle="modal"
+                ></i>
+                <i
+                  class="far fa-trash-alt"
+                  data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+                  style="font-size: 24px; color: rgb(55, 156, 196)"
+                ></i>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+</section>     

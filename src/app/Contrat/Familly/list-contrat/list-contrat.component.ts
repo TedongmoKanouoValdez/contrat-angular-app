@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContratService } from 'src/app/contrat.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { ContratService } from '../../ContratService/contrat.service';
 
 @Component({
   selector: 'app-list-contrat',
@@ -17,19 +15,13 @@ export class ListContratComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private contratService: ContratService,
-    private modalService: NgbModal
+    private contratService: ContratService
     ) { }
 
   ngOnInit(): void {
     this.getListContrats();
   }
 
-  openModal(content: any) {
-    // Utilisez btnId pour ouvrir la modal appropriée
-    const modalRef = this.modalService.open(content);
-    // Vous pouvez utiliser btnId pour personnaliser le comportement de la modal en fonction du bouton cliqué
-  }
 
   getListContrats(): void {
     this.contratService.getAllFamillies().subscribe(
