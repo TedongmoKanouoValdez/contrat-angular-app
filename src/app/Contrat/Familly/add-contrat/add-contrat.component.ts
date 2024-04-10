@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import {  Router,ActivatedRoute } from '@angular/router';
 import { ContratService } from '../../ContratService/contrat.service';
 
 
@@ -13,12 +13,41 @@ export class AddContratComponent implements OnInit {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   familleNameTouched = false;
+  parametre: string;
+  parametreId: string;
+  parametreistrue: string;
 
   constructor(
     private router: Router,
-    private contratService: ContratService) { }
+    private contratService: ContratService,
+    private route: ActivatedRoute,
+    private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    // Récupération des paramètre de l'URL
+    this.parametre = this.route.snapshot.queryParams['name']|| undefined;
+    this.parametreId = this.route.snapshot.queryParams['edit']|| undefined;
+  }
+
+  //
+  ngAfterViewInit(): void {
+    if (this.parametre) {
+      // Pour modifier la valeur de l'élément .userName (s'il s'agit d'un input)
+      const userName = document.getElementById('userName') as HTMLInputElement; // Assurez-vous de préciser que c'est un input
+      
+      // Pour modifier le texte de l'élément .titrePage
+      const titrePage = document.querySelector('.titrePage');
+      // Renderer pour les raisons de securité et compatibilité pour modifier
+      // le texte en interne avec la methode setProperty
+      this.renderer.setProperty(titrePage, 'innerText', 'Modifier une famille');
+
+      if (userName) { // Vérifie si l'élément existe
+        userName.value = this.parametre; // Définit la valeur du champ input
+          
+      } else {
+        console.error("L'élément avec l'ID 'userName' n'existe pas dans le DOM.");
+      }
+    }
   }
 
   createdFamilly(): void {
@@ -38,7 +67,7 @@ export class AddContratComponent implements OnInit {
           this.successMessage = 'L\'action s\'est déroulée avec succès.';
           setTimeout(() => {
            this.goToListFamille();
-          }, 2000); // Redirige après 2 secondes (2000 ms)
+          }, 2000);
         },
         (error) => {
           this.errorMessage = 'Cette famille existe deja';
@@ -51,6 +80,44 @@ export class AddContratComponent implements OnInit {
         }
       );
   
+  }
+
+  updateFamilly(): void {
+    // Pour modifier la valeur de l'élément .userName (s'il s'agit d'un input)
+    const userName = document.getElementById('userName') as HTMLInputElement; // Assurez-vous de préciser que c'est un input
+    //verifie si le champs est vide pour modifier et si ce n'est pas le cas il ne fait rien
+    if (!userName.value) {
+      this.parametreistrue = 'true';
+      return;
+    }
+
+    if (userName.value == this.parametre) {
+      return;
+    }
+
+    const Data = {
+      id: +this.parametreId,
+      Name: userName.value
+    };
+    
+    this.contratService.updateFamilly(+this.parametreId, Data)
+      .subscribe(
+        () => {
+          this.successMessage = 'L\'action s\'est déroulée avec succès.';
+          setTimeout(() => {
+           this.goToListFamille();
+          }, 2000);
+        },
+        (error) => {
+          // this.errorMessage = 'Cette famille existe deja';
+          if (error && error.error && error.error.message) {
+            this.errorMessage += ' ' + error.error.message;
+          }
+          setTimeout(() => {
+            this.errorMessage = null;
+          }, 3000);
+        }
+      );
   }
 
   

@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Ajouter une famille</h1>
+  <h1 class="titrePage">Ajouter une famille</h1>
 </div>
 <section class="container">
   <div class="row" style="margin-right: 55%">
@@ -35,9 +35,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col" *ngIf="!parametreId">
             <input type="text" class="form-control" [(ngModel)]="familleName" style="width: 200%"  (keyup.enter)="createdFamilly()" />
             <div *ngIf="!familleName && familleNameTouched" style="color: red;">Ce champ est requis.</div>
+          </div>
+          <div class="col" *ngIf="parametreId">
+            <input type="text" id="userName" class="form-control" style="width: 200%"  (keyup.enter)="updateFamilly()" />
+            <input type="text" class="form-control" style="display:none; width: 200%" />
+            <div *ngIf="parametreistrue == 'true'" style="color: red;">Ce champ est requis.</div>
           </div>
         </div>
     </div>
@@ -57,9 +62,13 @@
     <div class="col">
         <button (click)="goToListFamille()">Annuler</button>
     </div>
-    <div class="col" style="padding-left: 55%;">
+
+    <div class="col" *ngIf="!parametre" style="padding-left: 55%;">
         <button (click)="createdFamilly()">Ajouter</button>
     </div>
+    <div class="col" *ngIf="parametre" style="padding-left: 55%;">
+      <button (click)="updateFamilly()">Modifier</button>
+  </div>
 </div>
 
 

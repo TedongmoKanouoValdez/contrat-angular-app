@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ContratService } from '../../ContratService/contrat.service';
 
 @Component({
@@ -56,7 +56,28 @@ export class ListContratComponent implements OnInit {
       }
   }
   
+  
+  goToCreateFamille(editId: string, editName: string){
+    const navigationExtras: NavigationExtras = {
+      queryParams: { 
+        'edit': +editId,
+        'name': editName
+       } // Remplacez 'parametre' et 'valeur' par vos propres paramètres
+    };
+    const link = ['/contrats'];
+    this.router.navigate(link, navigationExtras);
+  }
 
+  modaleFamille(deleteName: string) {
+    const userName = document.getElementById('modalSupprimer') as HTMLInputElement;
+        
+    if (userName) {
+      console.log(userName.style);
+    //   userName.style.display = "block";
+    //   const titleModal = document.getElementById('exampleModalLabel') as HTMLInputElement;
+    //   titleModal.innerText = `Supprimer la famille ${deleteName}`;
+    }
+  }
   
   // searchFamillyByName(): void {
   //   if (this.famillyName.trim() !== '') {

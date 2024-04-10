@@ -1,0 +1,89 @@
+<div class="title">
+    <h1>Ajouter un administrateur</h1>
+  </div>
+  
+  <section class="container">
+    <div class="row">
+      <!-- Bloc à gauche -->
+      <div class="col-md-6">
+        <div class="element">
+          <div class="row">
+            <div class="col">
+              <span>Nom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="firstname" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Prénom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Prénom" [(ngModel)]="lastname" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Email*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Bloc à droite -->
+      <div class="col-md-6">
+        <div class="element">
+          <div class="row">
+            <div class="col">
+              <span>Phone Number*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="phoneNumber" />
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col">
+              <span>Mot de passe*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="password" class="form-control" placeholder="Mot de passe"  />
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger" style="margin-top: 1%; margin-left: 8%; margin-right: 50%" role="alert">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success" style="margin-top: 2%; margin-left: 8%; margin-right: 39%" role="alert">
+      {{ successMessage }}
+    </div>
+  
+    <hr style="margin-top: 15%; margin-left: 8%; margin-right: 8%" />
+    <div class="row" style="margin-left: 7%; margin-top: 6%; margin-bottom: 5%;">
+        <div class="col">
+            <button (click)="goToListAdmin()">Annuler</button>
+        </div>
+        <div class="col" style="padding-left: 55%;">
+            <button (click)="createAdmin()">Ajouter</button>
+       </div>
+    </div>
+
+  </section>
+  

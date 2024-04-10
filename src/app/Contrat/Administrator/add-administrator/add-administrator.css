@@ -17,4 +17,12 @@ button{
     width: 55%;
     border-radius: 5px;
 }
+input{
+    width: 80%;
+    padding: 2%;
+}
+.row{
+    margin-left: 3%;
+    padding: 1%;
+}
 

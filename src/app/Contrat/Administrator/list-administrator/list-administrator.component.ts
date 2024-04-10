@@ -32,6 +32,10 @@ export class ListAdministratorComponent implements OnInit {
     )
   }
 
+  goToCreateAdmin(){
+    const link = ['/createAdmin'];
+      this.router.navigate(link);
+  }
   // getListAdmin(): void {
   //   this.adminService.getAdmin().subscribe(
   //     (admin: any[]) => {
