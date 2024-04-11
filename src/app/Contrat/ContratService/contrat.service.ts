@@ -30,4 +30,9 @@ export class ContratService {
     const url = `${this.apiUrlPost}/${id}`;
     return this.http.put<any>(url, data);
   }
+
+  deleteFamilly(id: number): Observable<any> {
+    const url = `${this.apiUrlPost}/${id}`;
+    return this.http.delete<any>(url);
+  }
 }

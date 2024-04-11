@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2} from '@angular/core';
 import { AdministratorService } from '../../ContratService/administrator.service';
 import {  ActivatedRoute, Router } from '@angular/router';
 @Component({
@@ -24,10 +24,34 @@ export class AddAdministratorComponent implements OnInit {
   constructor( 
     private router : Router,
     private adminService: AdministratorService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.parametreId = this.route.snapshot.queryParams['edit'] || undefined;
+    this.parametre = this.route.snapshot.queryParams['name'] || undefined;
+  }
+
+  ngAfterViewInit(): void {
+    if(this.parametre){
+      const titlePage = document.querySelector('.titrePage');
+
+      this.renderer.setProperty(titlePage, 'innerText', 'Modifier un administrateur')
+      const storedData = localStorage.getItem("userData");
+
+      if (storedData != null) {
+        const userData = JSON.parse(storedData);
+        const firstnameAdmin = document.querySelector('#firstnameAdmin') as HTMLInputElement;
+        const lastnameAdmin = document.querySelector('#lastnameAdmin') as HTMLInputElement;
+        const phoneAdmin = document.querySelector('#phoneAdmin') as HTMLInputElement;
+        const emailAdmin = document.querySelector('#emailAdmin') as HTMLInputElement;
+        
+        firstnameAdmin.value = userData.userfirst;
+        lastnameAdmin.value = userData.userlast;
+        phoneAdmin.value = userData.phone;
+        emailAdmin.value = userData.useremail;
+      }
+    }
   }
 
   createAdmin(): void {
@@ -72,6 +96,61 @@ export class AddAdministratorComponent implements OnInit {
           }, 3000);
         }
       );
+  }
+
+  updateAdmin(): void {
+    const storedData = localStorage.getItem("userData");
+    const emailAdmin = document.querySelector('#emailAdmin') as HTMLInputElement;
+    const firstnameAdmin = document.querySelector('#firstnameAdmin') as HTMLInputElement;
+    const lastnameAdmin = document.querySelector('#lastnameAdmin') as HTMLInputElement;
+    const phoneAdmin = document.querySelector('#phoneAdmin') as HTMLInputElement;
+
+    // Vérification de l'email
+    if (!this.emailPattern.test(emailAdmin.value)) {
+      this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
+      return;
+    }
+
+    // Vérification des champs requis
+    if (!firstnameAdmin.value || !lastnameAdmin.value || !emailAdmin.value || !phoneAdmin.value) {
+      this.errorMessage = "Tous les champs sont requis!";
+      setTimeout(() => {
+        this.errorMessage = null; // Réinitialiser le message d'erreur après 3 secondes (3000 millisecondes)
+      }, 3000);
+      return;
+    }
+    
+      if (storedData != null) {
+        const userData = JSON.parse(storedData);
+               
+        const idAdmin = document.querySelector('#idAdmin') as HTMLInputElement;
+        // if (firstnameAdmin.value == userData.userfirst || lastnameAdmin.value == userData.userlast || phoneAdmin.value == userData.phone || emailAdmin.value == userData.useremail) {
+        //   return;
+        // }
+        const id = +idAdmin.value; // ID de l'administrateur à mettre à jour
+        const data = {
+          firstname: firstnameAdmin.value,
+          lastname: lastnameAdmin.value,
+          email: emailAdmin.value,
+          phoneNumber: phoneAdmin.value
+        };
+
+        this.adminService.postAdminUpdate(id, data)
+          .subscribe(
+            (response) => {
+              this.successMessage = 'Administrateur mis à jour avec succès';
+              setTimeout(() => {
+                this.goToListAdmin();
+              }, 2000);
+              console.log('Administrateur mis à jour avec succès :', response);
+              // Effectuez les actions nécessaires après la mise à jour réussie
+            },
+            (error) => {
+              console.error('Erreur lors de la mise à jour de l\'administrateur :', error);
+              // Traitez les erreurs de mise à jour de l'administrateur
+            }
+          );
+      }
   }
 
   goToListAdmin(){

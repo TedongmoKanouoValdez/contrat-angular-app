@@ -48,10 +48,31 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
+    display: none;
   }
-  .modaldelete {position: fixed;
-    top: 50%;
-    left: 50%;
+  .modaldelete {
+    position: fixed;
+    top: 22%;
+    left: 22%;
     transform: translate(50%, 50%);
-    z-index: 101;}
+    z-index: 101;
+    width: 30rem;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #fff;
+    
+  }
+
+  .modal-header {
+    justify-content: space-between;
+  }
   
+  .modal-body {
+    height: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-footer {
+    gap: 1rem;
+  }

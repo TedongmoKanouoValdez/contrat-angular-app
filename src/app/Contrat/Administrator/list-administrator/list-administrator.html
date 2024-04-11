@@ -4,7 +4,7 @@
     <div class="title">
       <h1>Liste des Administrateurs</h1>
     </div>
-      <button class="btn-add" (click)="goToCreateAdmin()" >Ajouter un administrateur</button> 
+      <button class="btn-add" (click)="goToCreateAdmin($event)" data-name="editAdmin" >Ajouter un administrateur</button> 
 </div>
 
 <section class="custom-section">
@@ -47,9 +47,18 @@
                     margin-right: 10px;
                     padding: 10px;
                   "
+                  (click)="goToCreateAdmin($event)"
+                  [attr.data-name]="'editAdmin'"
+                  [attr.data-first]="item.firstname"
+                  [attr.data-id]="item.idAdmin"
+                  [attr.data-email]="item.email"
+                  [attr.data-phone]="item.phoneNumber"
+                  [attr.data-last]="item.lastname"
                   data-bs-toggle="modal"
                 ></i>
                 <i
+                  *ngIf="admin && admin.length > 1"
+                  (click)="modaleAdmin( item.firstname, item.lastname, item.idAdmin )"
                   class="far fa-trash-alt"
                   data-bs-toggle="modal" data-bs-target="#btnSupprimer"
                   style="font-size: 24px; color: rgb(55, 156, 196)"
@@ -59,3 +68,25 @@
         </tbody>
     </table>
 </section>     
+
+<!-- Modal -->
+<div>
+  <div class="overlay" tabindex="-1">
+    <div class="modal-dialog modaldelete">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" (click)="closeModalAdmin( )" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="iddelete">
+          <p>Voulez-vous vraiment supprimer cet administrateur ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="closeModalAdmin( )" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" (click)="deleteAdmin( )" class="btn btn-primary">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

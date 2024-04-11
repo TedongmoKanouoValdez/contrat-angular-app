@@ -17,4 +17,15 @@ export class AdministratorService {
   postAdmin(data: any): Observable<any>{
     return this.http.post<any>(this.apiUrlPost, data);
   }
+
+  postAdminUpdate(id: number, data: any): Observable<any> {
+    const url = `${this.apiUrlPost}/${id}`; // URL avec l'ID de l'administrateur
+    return this.http.put<any>(url, data);
+  }
+
+  deleteAdmin(adminId: number): Observable<any> {
+    const url = `${this.apiUrlPost}/${adminId}`;
+    return this.http.delete<any>(url);
+  }
+  
 }

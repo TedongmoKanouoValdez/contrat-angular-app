@@ -43,7 +43,10 @@ export class ListContratComponent implements OnInit {
           this.contratService.searchFamillyByName(this.famillyName).subscribe(
               (response) => {
                   console.log('Résultat de la recherche :', response);
-                  this.searchResults = response.map((item: any) => item.name); // Mettre à jour les résultats de la recherche
+                  this.searchResults = response.map((item: any) => {
+                    return { id: item.id, name: item.name };
+                  });
+                   // Mettre à jour les résultats de la recherche
                   this.searching = false; // Mettre à jour la variable pour indiquer que la recherche est terminée
               },
               (error) => {
@@ -68,16 +71,64 @@ export class ListContratComponent implements OnInit {
     this.router.navigate(link, navigationExtras);
   }
 
-  modaleFamille(deleteName: string) {
-    const userName = document.getElementById('modalSupprimer') as HTMLInputElement;
+  modaleFamille(deleteName: string, deleteId: string) {
+    const overlay = document.querySelector('.overlay') as HTMLInputElement;
         
-    if (userName) {
-      console.log(userName.style);
-    //   userName.style.display = "block";
-    //   const titleModal = document.getElementById('exampleModalLabel') as HTMLInputElement;
-    //   titleModal.innerText = `Supprimer la famille ${deleteName}`;
+    if (overlay) {
+      overlay.style.display = "block";
+      
+      const titleModal = document.querySelector('.modal-title') as HTMLInputElement;
+      const ID = document.querySelector('#iddelete') as HTMLInputElement;
+      const Namedelete = document.querySelector('#Namedelete') as HTMLInputElement;
+      titleModal.innerText = `Supprimer la famille ${deleteName}`;
+      ID.value = deleteId;
+      Namedelete.value = deleteName;
     }
   }
+
+  closeModalFamille () {
+    const overlay = document.querySelector('.overlay') as HTMLInputElement;
+        
+    if (overlay) {
+      overlay.style.display = "none";
+    }
+  }
+
+  deleteFamilly(): void {
+    const userName = document.getElementById('Namedelete') as HTMLInputElement;
+    const userID = document.getElementById('iddelete') as HTMLInputElement;
+
+    if (!userName || !userID) {
+        console.error('Veuillez saisir le nom et l\'identifiant de la famille.');
+        return;
+    }
+
+    const Data = {
+        id: +userID.value,
+        Name: userName.value
+    };
+    console.log(Data);
+
+    this.callDeleteFamilly(+userID.value);
+    this.callDeleteFamilly(+userID.value);
+
+    // *ngIf="item && item.length > 1"
+
+  }
+
+callDeleteFamilly(id: number): void {
+    this.contratService.deleteFamilly(id)
+      .subscribe(
+        () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        },
+        (error) => {
+            console.log(error);
+        }
+      );
+}
   
   // searchFamillyByName(): void {
   //   if (this.famillyName.trim() !== '') {

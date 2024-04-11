@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministratorService } from '../../ContratService/administrator.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-list-administrator',
@@ -32,10 +32,92 @@ export class ListAdministratorComponent implements OnInit {
     )
   }
 
-  goToCreateAdmin(){
-    const link = ['/createAdmin'];
+  goToCreateAdmin(event: MouseEvent){
+
+    const target = event.target as HTMLElement; // Convertit l'élément cible en HTMLElement
+    const dataName = target.getAttribute('data-name');
+    const dataFirst = target.getAttribute('data-first');
+    const dataEmail = target.getAttribute('data-email');
+    const dataPhone = target.getAttribute('data-phone');
+    const datalast = target.getAttribute('data-last');
+    const dataId = target.getAttribute('data-id');
+
+    if (dataName == 'editAdmin' && dataFirst != null && dataId != null) {
+
+      const userDate = {
+        userfirst: dataFirst,
+        userlast: datalast,
+        useremail: dataEmail,
+        phone: dataPhone
+      };
+
+      const jsonData = JSON.stringify(userDate);
+      localStorage.setItem("userData", jsonData);
+
+      const navigationExtras: NavigationExtras = {
+        queryParams: { 
+          'edit': dataId,
+          'name': dataFirst
+         } // Remplacez 'parametre' et 'valeur' par vos propres paramètres
+      };
+      const link = ['/createAdmin'];
+      this.router.navigate(link, navigationExtras);
+
+    } else {
+      const link = ['/createAdmin'];
       this.router.navigate(link);
+    }
+    
   }
+
+  closeModalAdmin () {
+    const overlay = document.querySelector('.overlay') as HTMLInputElement;
+        
+    if (overlay) {
+      overlay.style.display = "none";
+    }
+  }
+
+  modaleAdmin(deletefirsname: string, deletelastname: string, deleteId: string) {
+    const overlay = document.querySelector('.overlay') as HTMLInputElement;
+        
+    if (overlay) {
+      overlay.style.display = "block";
+      
+      const titleModal = document.querySelector('.modal-title') as HTMLInputElement;
+      const ID = document.querySelector('#iddelete') as HTMLInputElement;
+      const Namedelete = document.querySelector('#Namedelete') as HTMLInputElement;
+      titleModal.innerText = `Supprimer la Administrateur ${deletefirsname} ${deletelastname}`;
+      ID.value = deleteId;
+    }
+  }
+
+  deleteAdmin(): void {
+    const userID = document.getElementById('iddelete') as HTMLInputElement;
+
+    if (!userID) {
+        console.error('Veuillez saisir le nom et l\'identifiant de la famille.');
+        return;
+    }
+    
+
+    this.callDeleteAdmin(+userID.value);
+    this.callDeleteAdmin(+userID.value);
+  }
+
+  callDeleteAdmin(id: number): void {
+    this.adminService.deleteAdmin(id)
+      .subscribe(
+        () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        },
+        (error) => {
+            console.log(error);
+        }
+      );
+}
   // getListAdmin(): void {
   //   this.adminService.getAdmin().subscribe(
   //     (admin: any[]) => {
