@@ -10,8 +10,7 @@ import { ContratService } from '../../ContratService/contrat.service';
 export class ListContratComponent implements OnInit {
     contrats: any[];
     famillyName: string;
-    searchResults: any[] = []; // Variable pour stocker les résultats de la recherche
-
+    searchResults: any[] = []; 
 
   constructor(
     private router : Router,
@@ -23,6 +22,7 @@ export class ListContratComponent implements OnInit {
   }
 
 
+  //Retourne la liste des familles
   getListContrats(): void {
     this.contratService.getAllFamillies().subscribe(
       contrats => {
@@ -35,8 +35,8 @@ export class ListContratComponent implements OnInit {
     );
   }
 
-  searching: boolean = false; // Variable pour indiquer si une recherche est en cours
-
+  searching: boolean = false; 
+  
   searchFamillyByName(): void {
       if (this.famillyName.trim() !== '') {
           this.searching = true; // Mettre à jour la variable pour indiquer que la recherche est en cours

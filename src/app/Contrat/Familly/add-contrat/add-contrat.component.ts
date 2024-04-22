@@ -32,8 +32,8 @@ export class AddContratComponent implements OnInit {
   //
   ngAfterViewInit(): void {
     if (this.parametre) {
-      // Pour modifier la valeur de l'élément .userName (s'il s'agit d'un input)
-      const userName = document.getElementById('userName') as HTMLInputElement; // Assurez-vous de préciser que c'est un input
+      // Pour modifier la valeur de l'élément .userName
+      const userName = document.getElementById('userName') as HTMLInputElement; 
       
       // Pour modifier le texte de l'élément .titrePage
       const titrePage = document.querySelector('.titrePage');
@@ -41,8 +41,8 @@ export class AddContratComponent implements OnInit {
       // le texte en interne avec la methode setProperty
       this.renderer.setProperty(titrePage, 'innerText', 'Modifier une famille');
 
-      if (userName) { // Vérifie si l'élément existe
-        userName.value = this.parametre; // Définit la valeur du champ input
+      if (userName) { // Vérifie si l'élément existe et definir la valeur du champs
+        userName.value = this.parametre; 
           
       } else {
         console.error("L'élément avec l'ID 'userName' n'existe pas dans le DOM.");
@@ -54,9 +54,9 @@ export class AddContratComponent implements OnInit {
 
     if (!this.familleName) {
       this.errorMessage = 'Action échouée : le nom de la famille est requis.';
-      return; // Arrêter l'exécution de la méthode
+      return;
     }
-
+    
     const famillyData = {
       Name: this.familleName
     };
@@ -71,9 +71,9 @@ export class AddContratComponent implements OnInit {
         },
         (error) => {
           this.errorMessage = 'Cette famille existe deja';
-          if (error && error.error && error.error.message) {
-            this.errorMessage += ' ' + error.error.message;
-          }
+          // if (error && error.error && error.error.message) {
+          //   this.errorMessage += ' ' + error.error.message;
+          // }
           setTimeout(() => {
             this.errorMessage = null;
           }, 3000);
@@ -83,8 +83,8 @@ export class AddContratComponent implements OnInit {
   }
 
   updateFamilly(): void {
-    // Pour modifier la valeur de l'élément .userName (s'il s'agit d'un input)
-    const userName = document.getElementById('userName') as HTMLInputElement; // Assurez-vous de préciser que c'est un input
+    // Pour modifier la valeur de l'élément .userName
+    const userName = document.getElementById('userName') as HTMLInputElement; 
     //verifie si le champs est vide pour modifier et si ce n'est pas le cas il ne fait rien
     if (!userName.value) {
       this.parametreistrue = 'true';

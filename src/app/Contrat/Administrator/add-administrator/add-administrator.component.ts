@@ -54,12 +54,56 @@ export class AddAdministratorComponent implements OnInit {
     }
   }
 
+  // createAdmin(): void {
+  //   // Vérification des champs requis
+  //   if (!this.firstname || !this.lastname || !this.email || !this.phoneNumber) {
+  //     this.errorMessage = "Tous les champs sont requis!";
+  //     setTimeout(() => {
+  //       this.errorMessage = null; 
+  //     }, 3000);
+  //     return;
+  //   }
+  
+  //   // Vérification de l'email
+  //   if (!this.emailPattern.test(this.email)) {
+  //     this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
+  //     return;
+  //   }
+  
+  //   // Si tous les champs sont remplis et que l'email est valide
+  //   const adminData = {
+  //     Firstname: this.firstname,
+  //     Lastname: this.lastname,
+  //     Email: this.email,
+  //     PhoneNumber: this.phoneNumber
+  //   };
+  
+  //   this.adminService.postAdmin(adminData)
+  //     .subscribe(
+  //       (response) => {
+  //         this.successMessage = 'L\'action s\'est déroulée avec succès.';
+  //         setTimeout(() => {
+  //           this.goToListAdmin();
+  //         }, 2000);
+  //       },
+  //       (err) => {
+  //         this.errorMessage = 'Cette admin existe déjà.';
+  //         if (err && err.error && err.error.message) {
+  //           this.errorMessage += ' ' + err.error.message;
+  //         }
+  //         setTimeout(() => {
+  //           this.errorMessage = null;
+  //         }, 3000);
+  //       }
+  //     );
+  // }
+
   createAdmin(): void {
     // Vérification des champs requis
     if (!this.firstname || !this.lastname || !this.email || !this.phoneNumber) {
       this.errorMessage = "Tous les champs sont requis!";
       setTimeout(() => {
-        this.errorMessage = null; // Réinitialiser le message d'erreur après 3 secondes (3000 millisecondes)
+        this.errorMessage = null; 
       }, 3000);
       return;
     }
@@ -70,33 +114,52 @@ export class AddAdministratorComponent implements OnInit {
       return;
     }
   
-    // Si tous les champs sont remplis et que l'email est valide
-    const adminData = {
-      Firstname: this.firstname,
-      Lastname: this.lastname,
-      Email: this.email,
-      PhoneNumber: this.phoneNumber
-    };
+    // Vérification si l'admin existe déjà
+    this.adminService.getAdmin().subscribe(
+      (admins) => {
+        const existingAdmin = admins.find(admin =>
+          admin.firstname === this.firstname &&
+          admin.lastname === this.lastname &&
+          admin.email === this.email &&
+          admin.phoneNumber === this.phoneNumber
+        );
   
-    this.adminService.postAdmin(adminData)
-      .subscribe(
-        (response) => {
-          this.successMessage = 'L\'action s\'est déroulée avec succès.';
-          setTimeout(() => {
-            this.goToListAdmin();
-          }, 2000);
-        },
-        (err) => {
-          this.errorMessage = 'Cette admin existe déjà.';
-          if (err && err.error && err.error.message) {
-            this.errorMessage += ' ' + err.error.message;
-          }
+        if (existingAdmin) {
+          this.errorMessage = 'Cet admin existe déjà.';
           setTimeout(() => {
             this.errorMessage = null;
           }, 3000);
+        } else {
+          // Si tous les champs sont remplis et que l'email est valide et que l'admin n'existe pas encore
+          const adminData = {
+            Firstname: this.firstname,
+            Lastname: this.lastname,
+            Email: this.email,
+            PhoneNumber: this.phoneNumber
+          };
+  
+          this.adminService.postAdmin(adminData).subscribe(
+            (response) => {
+              this.successMessage = 'L\'action s\'est déroulée avec succès.';
+              setTimeout(() => {
+                this.goToListAdmin();
+              }, 2000);
+            },
+            (err) => {
+              this.errorMessage = 'Erreur lors de la création de l\'admin.';
+              if (err && err.error && err.error.message) {
+                this.errorMessage += ' ' + err.error.message;
+              }
+              setTimeout(() => {
+                this.errorMessage = null;
+              }, 3000);
+            }
+          );
         }
-      );
+      }
+    );
   }
+  
 
   updateAdmin(): void {
     const storedData = localStorage.getItem("userData");
@@ -124,9 +187,7 @@ export class AddAdministratorComponent implements OnInit {
         const userData = JSON.parse(storedData);
                
         const idAdmin = document.querySelector('#idAdmin') as HTMLInputElement;
-        // if (firstnameAdmin.value == userData.userfirst || lastnameAdmin.value == userData.userlast || phoneAdmin.value == userData.phone || emailAdmin.value == userData.useremail) {
-        //   return;
-        // }
+      
         const id = +idAdmin.value; // ID de l'administrateur à mettre à jour
         const data = {
           firstname: firstnameAdmin.value,

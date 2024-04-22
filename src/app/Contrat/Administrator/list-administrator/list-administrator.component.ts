@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministratorService } from '../../ContratService/administrator.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'app-list-administrator',
@@ -8,14 +10,18 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: [ '../../Familly/list-contrat/list-contrat-component.css'
   ]
 })
+
 export class ListAdministratorComponent implements OnInit {
   admin: any[] = [];
+  filteredAdmins: any[] = [];
+  searchQuery: string = '';
 
   constructor(
     private router : Router,
     private adminService: AdministratorService
   ) { }
 
+ 
   ngOnInit(): void {
     this.getListAdmin();
   }
@@ -31,6 +37,19 @@ export class ListAdministratorComponent implements OnInit {
       }
     )
   }
+
+  applyFilter() {
+    if (this.searchQuery.trim() === '') {
+      this.filteredAdmins = this.admin;
+    } else {
+      this.filteredAdmins = this.admin.filter(admin =>
+        admin.firstname.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        admin.lastname.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        admin.email.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  }
+
 
   goToCreateAdmin(event: MouseEvent){
 
@@ -58,7 +77,7 @@ export class ListAdministratorComponent implements OnInit {
         queryParams: { 
           'edit': dataId,
           'name': dataFirst
-         } // Remplacez 'parametre' et 'valeur' par vos propres paramètres
+         } 
       };
       const link = ['/createAdmin'];
       this.router.navigate(link, navigationExtras);
@@ -87,7 +106,7 @@ export class ListAdministratorComponent implements OnInit {
       const titleModal = document.querySelector('.modal-title') as HTMLInputElement;
       const ID = document.querySelector('#iddelete') as HTMLInputElement;
       const Namedelete = document.querySelector('#Namedelete') as HTMLInputElement;
-      titleModal.innerText = `Supprimer la Administrateur ${deletefirsname} ${deletelastname}`;
+      titleModal.innerText = `Supprimer l'administrateur ${deletefirsname} ${deletelastname}`;
       ID.value = deleteId;
     }
   }
@@ -111,13 +130,19 @@ export class ListAdministratorComponent implements OnInit {
         () => {
             setTimeout(() => {
                 window.location.reload();
-            }, 1000);
+            });
         },
         (error) => {
             console.log(error);
         }
       );
 }
+
+
+
+  
+
+
   // getListAdmin(): void {
   //   this.adminService.getAdmin().subscribe(
   //     (admin: any[]) => {
