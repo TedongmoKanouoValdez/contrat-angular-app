@@ -1,14 +1,14 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import {  Router,ActivatedRoute } from '@angular/router';
-import { ContratService } from '../../ContratService/contrat.service';
+import { ContratService } from '../../ContratService/familly.service';
 
 
 @Component({
-  selector: 'app-add-contrat',
-  templateUrl: './add-contrat.component.html',
- styleUrls: ['./add-contrat.component.css']
+  selector: 'app-add-familly',
+  templateUrl: './add-familly.component.html',
+ styleUrls: ['./add-familly.component.css']
 })
-export class AddContratComponent implements OnInit {
+export class AddFamillyComponent implements OnInit {
   familleName: string;
   errorMessage: string | null = null;
   successMessage: string | null = null;
@@ -122,7 +122,7 @@ export class AddContratComponent implements OnInit {
 
   
   goToListFamille(){
-    const link = ['/contrat'];
+    const link = ['/famillies'];
     this.router.navigate(link);
   }
 }

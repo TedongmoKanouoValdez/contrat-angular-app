@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministratorService } from '../../ContratService/administrator.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { Pipe, PipeTransform } from '@angular/core';
 
 
 @Component({
   selector: 'app-list-administrator',
   templateUrl:'./list-administrator.html',
-  styleUrls: [ '../../Familly/list-contrat/list-contrat-component.css'
+  styleUrls: [ '../../Familly/list-familly/list-familly-component.css'
   ]
 })
 
@@ -115,7 +114,7 @@ export class ListAdministratorComponent implements OnInit {
     const userID = document.getElementById('iddelete') as HTMLInputElement;
 
     if (!userID) {
-        console.error('Veuillez saisir le nom et l\'identifiant de la famille.');
+        console.error('Veuillez saisir le nom et l\'identifiant du admin.');
         return;
     }
     

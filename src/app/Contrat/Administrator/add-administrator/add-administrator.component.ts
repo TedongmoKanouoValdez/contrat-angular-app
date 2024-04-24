@@ -50,6 +50,8 @@ export class AddAdministratorComponent implements OnInit {
         lastnameAdmin.value = userData.userlast;
         phoneAdmin.value = userData.phone;
         emailAdmin.value = userData.useremail;
+
+        emailAdmin.disabled = true;
       }
     }
   }

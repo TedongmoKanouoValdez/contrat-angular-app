@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { ContratService } from '../../ContratService/contrat.service';
+import { ContratService } from '../../ContratService/familly.service';
 
 @Component({
-  selector: 'app-list-contrat',
-  templateUrl: './list-contrat.component.html',
-  styleUrls: ['./list-contrat-component.css']
+  selector: 'app-list-familly',
+  templateUrl: './list-familly.component.html',
+  styleUrls: ['./list-familly-component.css']
 })
-export class ListContratComponent implements OnInit {
+export class ListFamillyComponent implements OnInit {
     contrats: any[];
     famillyName: string;
     searchResults: any[] = []; 
@@ -163,7 +163,7 @@ callDeleteFamilly(id: number): void {
   // }
   
   goToAddFamille(){
-    const link = ['/contrats'];
+    const link = ['/familly'];
     this.router.navigate(link);
   }
   

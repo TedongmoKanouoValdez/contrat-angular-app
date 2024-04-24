@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListContratComponent } from './Contrat/Familly/list-contrat/list-contrat.component';
-import { AddContratComponent } from './Contrat/Familly/add-contrat/add-contrat.component';
+import { ListFamillyComponent } from './Contrat/Familly/list-familly/list-familly.component';
+import { AddFamillyComponent } from './Contrat/Familly/add-familly/add-familly.component';
 import { ListAdministratorComponent } from './Contrat/Administrator/list-administrator/list-administrator.component';
 import { AddAdministratorComponent } from './Contrat/Administrator/add-administrator/add-administrator.component';
+import {ListClientComponent} from './Contrat/Client/list-client/list-client.component';
 
 const routes: Routes = [
-  {path: 'contrat', component: ListContratComponent},
-  {path: 'contrats', component: AddContratComponent},
+  {path: 'famillies', component: ListFamillyComponent},
+  {path: 'familly', component: AddFamillyComponent},
   {path: 'listAdmin', component: ListAdministratorComponent},
   {path: 'createAdmin', component: AddAdministratorComponent},
-  {path: '', redirectTo: 'contrat', pathMatch: 'full'}
+  {path: 'listeClient', component: ListClientComponent},
+  {path: '', redirectTo: 'famillies', pathMatch: 'full'}
 ];
 
 @NgModule({

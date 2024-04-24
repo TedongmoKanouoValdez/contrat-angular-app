@@ -1,0 +1,116 @@
+
+<div class="row">
+    <div class="title">
+      <h1>Liste des Clients</h1>
+    </div>
+      <button class="btn-add" (click)="goToCreateClient($event)" data-name="editAdmin" >Ajouter un client</button> 
+</div>
+
+<section class="custom-section">
+    <form>
+        <input
+          
+          name="adminData"
+          class="filter"
+          type="text"
+          [(ngModel)]="searchQuery" (input)="applyFilter()"
+          placeholder="Filtrer par domaine d'activite, nom company"
+        />
+        <button class="btn-Appliquer" type="button">Appliquer</button>
+      </form>
+
+      <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+        <thead sorted responsive class="">
+          <tr>
+              <th>Code Client</th>
+              <th>Nom d'activité</th>
+              <th>Nom entreprise</th>
+              <th>Nom entreprise mere</th>
+          </tr>
+        </thead>
+        <tbody>
+
+             <ng-container *ngIf="filterClient.length > 0; else noResults">
+              <!-- Afficher les administrateurs filtrés -->
+              <tr *ngFor="let client of filterClient">
+                <td>{{client.code_client}}</td>
+                <td>{{ client.business_area }}</td>
+                <td>{{ client.company_name }}</td>
+                <td>{{ client.parent_company_name }}</td>
+                <td
+                  style="
+                    text-align: right;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                  "
+                >
+                  <i
+                    class="fas fa-pen"
+                    style="
+                      font-size: 24px;
+                      color: rgb(55, 156, 196);
+                      margin-right: 10px;
+                      padding: 10px;
+                    "
+                    (click)="goToCreateClient($event)"
+                    [attr.data-name]="'editAdmin'"
+                    [attr.data-code]="client.code_client"
+                    [attr.data-business]="client.business_area"
+                    [attr.data-company]="client.company_name"
+                    [attr.data-parentCompany]="client.parent_company_name"
+                    data-bs-toggle="modal"
+                  ></i>
+                  <i
+                    (click)="modalClient(client.idclient )"
+                    class="far fa-trash-alt"
+                    data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+                    style="font-size: 24px; color: rgb(55, 156, 196)"
+                  ></i>
+                </td>
+              </tr>
+            </ng-container>
+            <!-- Afficher un message si aucune correspondance n'est trouvée -->
+            <ng-template #noResults>
+              <tr *ngFor="let item of client">
+                <td>{{item.code_client}}</td>
+                <td>{{ item.business_area }}</td>
+                <td>{{ item.company_name }}</td>
+                <td>{{ item.parent_company_name }}</td>
+                <td
+                  style="
+                    text-align: right;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                  "
+                >
+                  <i
+                    class="fas fa-pen"
+                    style="
+                      font-size: 24px;
+                      color: rgb(55, 156, 196);
+                      margin-right: 10px;
+                      padding: 10px;
+                    "
+                    (click)="goToCreateClient($event)"
+                    [attr.data-name]="'editAdmin'"
+                    [attr.data-business]="item.business_area"
+                    [attr.data-company]="item.company_name"
+                    [attr.data-parentCompany]="item.parent_company_name"
+                    data-bs-toggle="modal"
+                  ></i>
+                  <i
+                    (click)="modalClient( item.idclient )"
+                    class="far fa-trash-alt"
+                    data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+                    style="font-size: 24px; color: rgb(55, 156, 196)"
+                  ></i>
+                </td>
+              </tr> 
+            </ng-template>
+  
+          </tbody>
+      </table>
+
+</section>

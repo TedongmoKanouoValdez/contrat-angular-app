@@ -4,20 +4,24 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListContratComponent } from './Contrat/Familly/list-contrat/list-contrat.component';
-import { AddContratComponent } from './Contrat/Familly/add-contrat/add-contrat.component';
+import { ListFamillyComponent } from './Contrat/Familly/list-familly/list-familly.component';
+import { AddFamillyComponent } from './Contrat/Familly/add-familly/add-familly.component';
 import { FormsModule } from '@angular/forms';
 import { ListAdministratorComponent } from './Contrat/Administrator/list-administrator/list-administrator.component';
 import { AddAdministratorComponent } from './Contrat/Administrator/add-administrator/add-administrator.component';
+import { AddClientComponent } from './Contrat/Client/add-client/add-client.component';
+import { ListClientComponent } from './Contrat/Client/list-client/list-client.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListContratComponent,
-    AddContratComponent,
+    ListFamillyComponent,
+    AddFamillyComponent,
     ListAdministratorComponent,
-    AddAdministratorComponent
+    AddAdministratorComponent,
+    AddClientComponent,
+    ListClientComponent
   ],
   imports: [
     BrowserModule,
