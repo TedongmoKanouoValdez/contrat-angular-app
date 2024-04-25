@@ -148,7 +148,7 @@ export class AddAdministratorComponent implements OnInit {
               }, 2000);
             },
             (err) => {
-              this.errorMessage = 'Erreur lors de la création de l\'admin.';
+              this.errorMessage = 'L\'action s\'est déroulée a echoué.';
               if (err && err.error && err.error.message) {
                 this.errorMessage += ' ' + err.error.message;
               }

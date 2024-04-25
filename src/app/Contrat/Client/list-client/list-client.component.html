@@ -3,14 +3,13 @@
     <div class="title">
       <h1>Liste des Clients</h1>
     </div>
-      <button class="btn-add" (click)="goToCreateClient($event)" data-name="editAdmin" >Ajouter un client</button> 
+      <button class="btn-add" (click)="goToCreateClient($event)" data-name="editClient" >Ajouter un client</button> 
 </div>
 
 <section class="custom-section">
     <form>
         <input
-          
-          name="adminData"
+          name="clientData"
           class="filter"
           type="text"
           [(ngModel)]="searchQuery" (input)="applyFilter()"
@@ -54,15 +53,18 @@
                       padding: 10px;
                     "
                     (click)="goToCreateClient($event)"
-                    [attr.data-name]="'editAdmin'"
+                    [attr.data-name]="'editClient'"
+                    [attr.data-name]="'editClient'"
                     [attr.data-code]="client.code_client"
+                    [attr.data-id]="client.id_client"
                     [attr.data-business]="client.business_area"
                     [attr.data-company]="client.company_name"
-                    [attr.data-parentCompany]="client.parent_company_name"
+                    [attr.data-parentcompany]="client.parent_company_name"
+
                     data-bs-toggle="modal"
                   ></i>
                   <i
-                    (click)="modalClient(client.idclient )"
+                    (click)="modalClient(client.company_name, client.idClient )"
                     class="far fa-trash-alt"
                     data-bs-toggle="modal" data-bs-target="#btnSupprimer"
                     style="font-size: 24px; color: rgb(55, 156, 196)"
@@ -94,14 +96,17 @@
                       padding: 10px;
                     "
                     (click)="goToCreateClient($event)"
-                    [attr.data-name]="'editAdmin'"
+                    [attr.data-name]="'editClient'"
+                    [attr.data-code]="item.code_client"
+                    [attr.data-id]="item.id_client"
                     [attr.data-business]="item.business_area"
                     [attr.data-company]="item.company_name"
-                    [attr.data-parentCompany]="item.parent_company_name"
+                    [attr.data-parentcompany]="item.parent_company_name"
+
                     data-bs-toggle="modal"
                   ></i>
                   <i
-                    (click)="modalClient( item.idclient )"
+                    (click)="modalClient( item.company_name, item.id_client )"
                     class="far fa-trash-alt"
                     data-bs-toggle="modal" data-bs-target="#btnSupprimer"
                     style="font-size: 24px; color: rgb(55, 156, 196)"
@@ -114,3 +119,24 @@
       </table>
 
 </section>
+
+<div>
+  <div class="overlay" tabindex="-1">
+    <div class="modal-dialog modaldelete">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" (click)="closeModalClient( )" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="iddelete">
+          <p>Voulez-vous vraiment supprimer ce client? ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="closeModalClient( )" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" (click)="deleteClient( )" class="btn btn-primary">supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../ContratService/client.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { error } from 'console';
+import { Console, error } from 'console';
 
 @Component({
   selector: 'app-list-client',
@@ -40,8 +40,8 @@ export class ListClientComponent implements OnInit {
       this.filterClient = this.client;
     } else {
       this.filterClient = this.client.filter(client =>
-        (client.Business_area && client.Business_area.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
-        (client.Company_name && client.Company_name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        (client.business_area && client.business_area.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (client.company_name && client.company_name.toLowerCase().includes(this.searchQuery.toLowerCase()))
       );
     }
     console.log(this.applyFilter)
@@ -55,7 +55,7 @@ export class ListClientComponent implements OnInit {
     const dataCode = target.getAttribute('data-code');
     const dataBusiness = target.getAttribute('data-business');
     const dataCompany = target.getAttribute('data-company');
-    const dataParent_company_name = target.getAttribute('data-ParentCompanyName');
+    const dataParentCompanyName = target.getAttribute('data-parentcompany');
     const dataId = target.getAttribute('data-id');
 
     if(dataName == 'editClient' && dataBusiness != null && dataId != null){
@@ -64,7 +64,7 @@ export class ListClientComponent implements OnInit {
         userCode: dataCode,
         userBusiness: dataBusiness,
         userCompany: dataCompany,
-        userParentCompanyName: dataParent_company_name
+        userParentCompanyName: dataParentCompanyName
       };
 
       const jsonData = JSON.stringify(userDate);
@@ -94,7 +94,7 @@ export class ListClientComponent implements OnInit {
      }
   }
 
-  modalClient(deleteId: string){
+  modalClient(deleteCompany: string,deleteId: string){
     const overlay = document.querySelector('.overlay') as HTMLInputElement;
 
     if(overlay) {
@@ -103,7 +103,7 @@ export class ListClientComponent implements OnInit {
       const titleModal = document.querySelector('.modal-title') as HTMLInputElement;
       const ID = document.querySelector('#iddelete') as HTMLInputElement;
       const Namedelete = document.querySelector('#Namedelete') as HTMLInputElement;
-      titleModal.innerText = 'Voulez-vous vraiment supprimer ce client ';
+      titleModal.innerText = `Supprimer le client ${deleteCompany}`;
       ID.value = deleteId;
     }
   }
@@ -116,9 +116,7 @@ export class ListClientComponent implements OnInit {
       console.error ('Veuillez saisir le nom ...')
       return;
     }
-
     this.callDeleteClient(+userId.value);
-    this.callDeleteClient(+userId.value)
   }
 
   callDeleteClient(id: number): void {
