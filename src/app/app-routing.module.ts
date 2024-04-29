@@ -6,6 +6,8 @@ import { ListAdministratorComponent } from './Contrat/Administrator/list-adminis
 import { AddAdministratorComponent } from './Contrat/Administrator/add-administrator/add-administrator.component';
 import {ListClientComponent} from './Contrat/Client/list-client/list-client.component';
 import { AddClientComponent } from './Contrat/Client/add-client/add-client.component';
+import { ListExpertComponent } from './Contrat/Expert/list-expert/list-expert.component';
+import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.component';
 
 const routes: Routes = [
   {path: 'famillies', component: ListFamillyComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
   {path: 'createAdmin', component: AddAdministratorComponent},
   {path: 'listeClient', component: ListClientComponent},
   {path: 'createClient', component: AddClientComponent},
+  {path: 'listExpert', component: ListExpertComponent},
+  {path: 'createExpert', component: AddExpertComponent},
   {path: '', redirectTo: 'famillies', pathMatch: 'full'}
 ];
 

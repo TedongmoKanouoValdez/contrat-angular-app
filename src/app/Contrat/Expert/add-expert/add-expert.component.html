@@ -1,0 +1,220 @@
+<div class="title">
+  <h1 class="titrePage">Ajouter un expert</h1>
+</div>
+
+<section class="container">
+  <div class="row">
+    <!-- Bloc à gauche -->
+    <div class="col-md-6">
+      <div class="element">
+        <div class="row">
+          <div class="col">
+            <span>Nom*</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Nom" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>Prenom*</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Prenom" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>Email*</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Email" />
+          </div>
+        </div>
+
+        <div class="menu">
+            <div class="title">
+              <span>Expertise</span>
+            </div>
+            <div>
+                <label for="checkbox">Generaliste</label>
+               <input type="checkbox">
+            </div>
+            
+                <button class="btn">ajouter une expertise</button>
+           
+            
+        </div>
+
+        
+      </div>
+
+      <!-- <div *ngIf="parametre" class="element">
+          <input type="hidden" id="idClient" [value]="parametreId">
+          <div class="row">
+            <div class="col">
+              <span>Code CLient*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" id="codeClient" class="form-control" placeholder="Code Client" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Domaine d'activité*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" id="businessArea" class="form-control" placeholder="Domaine d'activité" />
+            </div>
+          </div>
+        </div> -->
+    </div>
+
+    <!-- Bloc à droite -->
+    <div class="col-md-6">
+      <div class="element">
+        <div class="row">
+          <div class="col">
+            <span>Mot de passe</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Mot de passe"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <span>Societé*</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="societe" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>Numero de telephone*</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Numero de telephone"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-6" *ngIf="parametre">
+        <div class="element">
+          <div class="row">
+            <div class="col">
+              <span>Nom entreprise *</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" id="companyName" class="form-control" placeholder="Phone Number" />
+            </div>
+          </div>
+            <div class="row">
+              <div class="col">
+                <span>Nom entreprise mère</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input type="text" id="companyParent" class="form-control" placeholder="Nom entreprise mère" />
+              </div>
+            </div>
+             <div class="row">
+            <div class="col">
+              <span>Mot de passe*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="password" class="form-control" placeholder="Mot de passe"  />
+            </div>
+          </div> 
+        </div>
+      </div> -->
+  </div>
+
+  <div class="container">
+    <div class="left-panel">
+      <h2>Généraliste</h2>
+      <!-- Liste des expertises généralistes -->
+      <ul>
+        <li>Expertise 1</li>
+        <li>Expertise 2</li>
+        <!-- Ajoutez ici d'autres expertises généralistes -->
+      </ul>
+    </div>
+    <div class="right-panel">
+      <h2>Expertise</h2>
+      <!-- Liste des expertises spécifiques -->
+      <ul>
+        <li>Expertise 3</li>
+        <li>Expertise 4</li>
+        <!-- Ajoutez ici d'autres expertises spécifiques -->
+      </ul>
+      <!-- Petite case à cocher -->
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox">Petite case à cocher</label>
+      <!-- Bouton pour ajouter une expertise -->
+      <button (click)="toggleExpertiseForm()">Ajouter une expertise</button>
+      <!-- Formulaire pour ajouter une expertise -->
+      <div *ngIf="showExpertiseForm">
+        <select>
+          <option value="expertise1">Expertise 1</option>
+          <option value="expertise2">Expertise 2</option>
+          <!-- Ajoutez ici d'autres options d'expertise -->
+        </select>
+        <button (click)="cancel()">Annuler</button>
+        <button (click)="validate()">Valider</button>
+      </div>
+    </div>
+  </div>
+
+  <!--   
+    <div *ngIf="errorMessage" class="alert alert-danger" style="margin-top: 1%; margin-left: 8%; margin-right: 50%" role="alert">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success" style="margin-top: 2%; margin-left: 8%; margin-right: 39%" role="alert">
+      {{ successMessage }}
+    </div> -->
+
+  <hr style="margin-top: 15%; margin-left: 8%; margin-right: 8%" />
+  <div class="row" style="margin-left: 7%; margin-top: 6%; margin-bottom: 5%">
+    <div class="col">
+      <button (click)="goToListExpert()">Annuler</button>
+    </div>
+    <div class="col" style="padding-left: 55%">
+      <button (click)="goToListExpert()">Ajouter</button>
+    </div>
+    <!-- <div class="col" *ngIf="parametre" style="padding-left: 55%;">
+          <button (click)="updateClient()">Modifier</button>
+      </div> -->
+  </div>
+</section>

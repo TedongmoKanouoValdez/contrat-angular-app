@@ -1,0 +1,126 @@
+
+<div class="row">
+    <div class="title">
+      <h1>Liste des experts</h1>
+    </div>
+      <button class="btn-add" data-name="editAdmin" >Ajouter un expert</button> 
+</div>
+
+<section class="custom-section">
+    <form>
+      <input
+        
+        name="adminData"
+        class="filter"
+        type="text"
+        placeholder="Filtrer par nom,prenom,expertise"
+      />
+      <button class="btn-Appliquer" type="button">Appliquer</button>
+    </form>
+    <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+      <thead sorted responsive class="">
+        <tr>
+            <th>Nom | Prenom</th>
+            <th>Expertise</th>
+            <th>Email</th>
+            <th>Contrat</th>
+        </tr>
+      </thead>
+      <tbody>
+           <ng-container>
+            <tr>
+              <td><a href="" style="color: rgb(55, 156, 196);">valdez tedongmo</a></td>
+              <td>Telecom</td>
+              <td>valdez@gmail.com</td>
+              <td><a href="" style="color: rgb(55, 156, 196);">1 contrat</a></td>
+              <td
+                style="
+                  text-align: right;
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                ">
+                <i
+                  class="fas fa-pen"
+                  style="
+                    font-size: 24px;
+                    color: rgb(55, 156, 196);
+                    margin-right: 10px;
+                    padding: 10px; "
+                  data-bs-toggle="modal"
+                ></i>
+                <i
+                  class="far fa-trash-alt"
+                  data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+                  style="font-size: 24px; color: rgb(55, 156, 196)"
+                ></i>
+              </td>
+            </tr>
+          </ng-container>
+          <!-- Afficher un message si aucune correspondance n'est trouvée -->
+          <!-- <ng-template #noResults>
+            <tr>
+              <td scope="row">{{ item.firstname }} {{ item.lastname}}</td>
+              <td scope="row">{{ item.email}}</td>
+              <td scope="row">{{ item.phoneNumber}}</td>
+              <td
+                style="
+                  text-align: right;
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-pen"
+                  style="
+                    font-size: 24px;
+                    color: rgb(55, 156, 196);
+                    margin-right: 10px;
+                    padding: 10px;
+                  "
+                  (click)="goToCreateAdmin($event)"
+                  [attr.data-name]="'editAdmin'"
+                  [attr.data-first]="item.firstname"
+                  [attr.data-id]="item.idAdmin"
+                  [attr.data-email]="item.email"
+                  [attr.data-phone]="item.phoneNumber"
+                  [attr.data-last]="item.lastname"
+                  data-bs-toggle="modal"
+                ></i>
+                <i
+                  *ngIf="admin && admin.length > 1"
+                  (click)="modaleAdmin( item.firstname, item.lastname, item.idAdmin )"
+                  class="far fa-trash-alt"
+                  data-bs-toggle="modal" data-bs-target="#btnSupprimer"
+                  style="font-size: 24px; color: rgb(55, 156, 196)"
+                ></i>
+              </td>
+            </tr> 
+          </ng-template> -->
+
+        </tbody>
+    </table>
+</section>     
+
+<!-- Modal -->
+<!-- <div>
+  <div class="overlay" tabindex="-1">
+    <div class="modal-dialog modaldelete">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="iddelete">
+          <p>Voulez-vous vraiment supprimer cet administrateur ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary">supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
