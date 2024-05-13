@@ -29,7 +29,9 @@ export class AddExpertComponent implements OnInit {
     this.showExpertiseForm = false;
   }
   goToListExpert():void{
-    const link = ['/listeExpert'];
+    const link = ['/listExpert'];
     this.router.navigate(link);
   }
+
+ 
 }

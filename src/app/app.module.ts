@@ -13,6 +13,7 @@ import { AddClientComponent } from './Contrat/Client/add-client/add-client.compo
 import { ListClientComponent } from './Contrat/Client/list-client/list-client.component';
 import { ListExpertComponent } from './Contrat/Expert/list-expert/list-expert.component';
 import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.component';
+import { ExpertDetailsComponent } from './Contrat/Expert/expert-details/expert-details.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.compo
     AddClientComponent,
     ListClientComponent,
     ListExpertComponent,
-    AddExpertComponent
+    AddExpertComponent,
+    ExpertDetailsComponent
   ],
   imports: [
     BrowserModule,

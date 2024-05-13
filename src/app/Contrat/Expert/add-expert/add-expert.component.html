@@ -1,5 +1,5 @@
 <div class="title">
-  <h1 class="titrePage">Ajouter un expert</h1>
+  <h1 class="titrePage" >Ajouter un expert</h1>
 </div>
 
 <section class="container">
@@ -48,7 +48,6 @@
             </div>
             
                 <button class="btn">ajouter une expertise</button>
-           
             
         </div>
 
@@ -160,41 +159,6 @@
       </div> -->
   </div>
 
-  <div class="container">
-    <div class="left-panel">
-      <h2>Généraliste</h2>
-      <!-- Liste des expertises généralistes -->
-      <ul>
-        <li>Expertise 1</li>
-        <li>Expertise 2</li>
-        <!-- Ajoutez ici d'autres expertises généralistes -->
-      </ul>
-    </div>
-    <div class="right-panel">
-      <h2>Expertise</h2>
-      <!-- Liste des expertises spécifiques -->
-      <ul>
-        <li>Expertise 3</li>
-        <li>Expertise 4</li>
-        <!-- Ajoutez ici d'autres expertises spécifiques -->
-      </ul>
-      <!-- Petite case à cocher -->
-      <input type="checkbox" id="checkbox" />
-      <label for="checkbox">Petite case à cocher</label>
-      <!-- Bouton pour ajouter une expertise -->
-      <button (click)="toggleExpertiseForm()">Ajouter une expertise</button>
-      <!-- Formulaire pour ajouter une expertise -->
-      <div *ngIf="showExpertiseForm">
-        <select>
-          <option value="expertise1">Expertise 1</option>
-          <option value="expertise2">Expertise 2</option>
-          <!-- Ajoutez ici d'autres options d'expertise -->
-        </select>
-        <button (click)="cancel()">Annuler</button>
-        <button (click)="validate()">Valider</button>
-      </div>
-    </div>
-  </div>
 
   <!--   
     <div *ngIf="errorMessage" class="alert alert-danger" style="margin-top: 1%; margin-left: 8%; margin-right: 50%" role="alert">
