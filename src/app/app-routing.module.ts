@@ -8,6 +8,8 @@ import {ListClientComponent} from './Contrat/Client/list-client/list-client.comp
 import { AddClientComponent } from './Contrat/Client/add-client/add-client.component';
 import { ListExpertComponent } from './Contrat/Expert/list-expert/list-expert.component';
 import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.component';
+import { AddDirecteurComponent } from './Contrat/Directeur/add-directeur/add-directeur.component';
+import { ListDirecteurComponent } from './Contrat/Directeur/list-directeur/list-directeur.component';
 
 const routes: Routes = [
   {path: 'famillies', component: ListFamillyComponent},
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path: 'createClient', component: AddClientComponent},
   {path: 'listExpert', component: ListExpertComponent},
   {path: 'createExpert', component: AddExpertComponent},
+  {path: 'createDirector', component: AddDirecteurComponent},
+  {path: 'listDirecteur', component: ListDirecteurComponent},
   {path: '', redirectTo: 'famillies', pathMatch: 'full'}
 ];
 

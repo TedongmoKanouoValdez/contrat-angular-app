@@ -14,6 +14,8 @@ import { ListClientComponent } from './Contrat/Client/list-client/list-client.co
 import { ListExpertComponent } from './Contrat/Expert/list-expert/list-expert.component';
 import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.component';
 import { ExpertDetailsComponent } from './Contrat/Expert/expert-details/expert-details.component';
+import { AddDirecteurComponent } from './Contrat/Directeur/add-directeur/add-directeur.component';
+import { ListDirecteurComponent } from './Contrat/Directeur/list-directeur/list-directeur.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ExpertDetailsComponent } from './Contrat/Expert/expert-details/expert-d
     ListClientComponent,
     ListExpertComponent,
     AddExpertComponent,
-    ExpertDetailsComponent
+    ExpertDetailsComponent,
+    AddDirecteurComponent,
+    ListDirecteurComponent
   ],
   imports: [
     BrowserModule,
