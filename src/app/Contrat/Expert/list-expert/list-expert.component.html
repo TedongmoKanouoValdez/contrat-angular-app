@@ -28,8 +28,8 @@
       </thead>
       <tbody>
            <ng-container>
-            <tr *ngFor="let item of expert" (click)="selectExpert(item)">
-              <td><a href="" style="color: rgb(55, 156, 196);">{{item.name_expert}} {{item.lastname}}</a></td>
+            <tr *ngFor="let item of expert">
+              <td><a href="/" (click)="DetailExpert()" [attr.data-name]="item.name_expert" [attr.data-Prenon]="item.lastname" [attr.data-Expertise]="item.expertise" [attr.data-Email]="item.email" [attr.data-Telephone]=""  style="color: rgb(55, 156, 196);">{{item.name_expert}} {{item.lastname}}</a></td>
               <td>{{item.expertise}}</td>
               <td>{{item.email}}</td>
               <td><a href="" style="color: rgb(55, 156, 196);">1 contrat</a></td>

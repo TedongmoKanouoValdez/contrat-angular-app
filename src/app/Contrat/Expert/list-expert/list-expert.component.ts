@@ -49,10 +49,10 @@ export class ListExpertComponent implements OnInit {
     )
   }
 
-  selectExpert(expert: any): void {
-    this.selectedExpert = expert; // Stockez l'expert sélectionné
+  DetailExpert(): void {
+    alert();
   }
-  
+
   
   goToCreateExpert(): void {
     const link = ['/createExpert'];

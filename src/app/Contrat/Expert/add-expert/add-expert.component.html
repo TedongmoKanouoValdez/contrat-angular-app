@@ -39,16 +39,39 @@
         </div>
 
         <div class="menu">
-            <div class="title">
-              <span>Expertise</span>
+          <div class="content_addExpert">
+            <div class="content_titleAddExpert">
+              <div>
+                <span>Expertise *</span>
+              </div>
+              <div class="content_AddExpertGeneraliste">
+                  <label for="checkbox">Generaliste</label>
+                 <input type="checkbox">
+              </div>
             </div>
-            <div>
-                <label for="checkbox">Generaliste</label>
-               <input type="checkbox">
-            </div>
-            
-                <button class="btn">ajouter une expertise</button>
-            
+            <div class="content_btnAddExpert">
+              <button class="" (click)="onButtonClickAddExpert()" *ngIf="isAjouterVisible">ajouter une expertise</button>
+              <div class="content_validerAddExpert" *ngIf="isMessageVisible">
+                <div>
+                  <select name="" id="">
+                    <option value="">Choisir une expertise</option>
+                    <option value="">expertise 1</option>
+                    <option value="">expertise 2</option>
+                    <option value="">expertise 3</option>
+                    <option value="">expertise 4</option>
+                  </select>
+                </div>
+                <div class="content_twoBtnAddExpert">
+                  <div>
+                    <button type="button" class="">Annuler</button>
+                  </div>
+                  <div>
+                    <button type="button" class="">Valider</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>           
         </div>
 
         

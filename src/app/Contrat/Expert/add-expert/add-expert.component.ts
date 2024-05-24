@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AddExpertComponent implements OnInit {
   showExpertiseForm: boolean = false;
+  // Propriété pour suivre l'état du basculement
+  isMessageVisible: boolean = false;
+  isAjouterVisible: boolean = true;
+
   constructor(
     private router: Router
   ) { }
@@ -31,6 +35,17 @@ export class AddExpertComponent implements OnInit {
   goToListExpert():void{
     const link = ['/listExpert'];
     this.router.navigate(link);
+  }
+
+  onButtonClickAddExpert(): void {
+     this.isMessageVisible = !this.isMessageVisible;
+     this.isAjouterVisible = !this.isAjouterVisible;
+     const elements = document.querySelectorAll('.content_btnAddExpert');
+     
+     elements.forEach((element) => {
+      const htmlElement = element as HTMLElement;
+      htmlElement.style.marginBottom = '0rem'
+    });
   }
 
  

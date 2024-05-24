@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'createExpert', component: AddExpertComponent},
   {path: 'createDirector', component: AddDirecteurComponent},
   {path: 'listDirecteur', component: ListDirecteurComponent},
-  {path: '', redirectTo: 'famillies', pathMatch: 'full'}
+  // {path: '', redirectTo: 'famillies', pathMatch: 'full'}
 ];
 
 @NgModule({

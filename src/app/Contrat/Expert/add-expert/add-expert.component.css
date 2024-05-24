@@ -43,4 +43,74 @@ input{
     width: 75%;
   }
   
-  
+/* Design to addExpert */
+
+.content_addExpert {
+    width: 25rem;
+}
+.content_titleAddExpert {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.content_AddExpertGeneraliste {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.content_AddExpertGeneraliste label {
+    font-size: 0.8rem;
+    color: #009bac;
+}
+
+.content_titleAddExpert div span {
+    font-weight: 600;
+    color: #7c848b;
+}
+
+.content_btnAddExpert {
+    margin-bottom: 3rem;
+}
+
+.content_btnAddExpert button {
+    padding: 0.5rem;
+    width: 11rem;
+    background-color: #009bac;
+}
+
+.content_validerAddExpert {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.content_validerAddExpert div select {
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #7c848b;
+    border-radius: 6px;
+    color: #7c848b;
+}
+
+.content_twoBtnAddExpert {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_twoBtnAddExpert button {
+    padding: 0.5rem;
+    width: 9rem;
+    background-color: #009bac;
+}
+
+.content_twoBtnAddExpert div:first-of-type button {
+    background-color: #fff;
+    color: #009bac;
+    border: 2px solid #009bac;
+}
+
+.hiddenAddExpert {
+    display: none;
+}
