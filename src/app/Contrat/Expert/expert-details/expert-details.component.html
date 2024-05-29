@@ -1,0 +1,69 @@
+
+<div class="row">
+    <div class="title">
+      <h1>Profil <span #prenom class="prenom"> : </span> <span class="id"></span></h1>
+    </div>
+      <button class="btn-add" data-name="editAdmin">Modifier</button> 
+</div>
+
+<section class="custom-section">
+    <div style="display: flex; flex-direction: column; gap: 4rem;">
+        <div>
+            <div>
+                <span class="title_content_detail_expert">Informations du contrat</span>
+            </div>
+            <div>
+                <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+                    <thead sorted responsive class="">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Expertise</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container>
+                        <tr>
+                            <td><span #name class="name"></span><input #nameIn type="hidden" class="nameIn"></td>
+                            <td><span #prenomt class="prenomt"></span><input #prenomIn type="hidden" class="prenomIn"></td>
+                            <td><span #experte class="experte"></span><input #expertIn type="hidden" class="expertIn"></td>
+                            <td><span #email class="email"></span><input #emailIn type="hidden" class="emailIn"></td>
+                            <td><span #contact class="contact"></span><input #contactIn type="hidden" class="contactIn"></td>
+                        </tr>
+                        </ng-container>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <span class="title_content_detail_expert">Informations du contrat</span>
+            </div>
+            <div>
+                <table class="table table-striped" style="width: 98%; margin-top: 25px; margin-left: 2%">
+                    <thead sorted responsive class="">
+                    <tr>
+                        <th>N° contrat</th>
+                        <th>Intitute contrat</th>
+                        <th>Familles</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container>
+                        <tr>
+                            <td><span #contrat class="contrat"></span><input #contratIn type="hidden" class="contratIn"></td>
+                            <td><span #Intitute class="Intitute"></span><input #IntituteIn type="hidden" class="IntituteIn"></td>
+                            <td><span #Familles class="Familles"></span><input #FamillesIn type="hidden" class="FamillesIn"></td>
+                        </tr>
+                        </ng-container>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>     

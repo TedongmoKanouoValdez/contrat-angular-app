@@ -52,7 +52,7 @@
             <div class="content_btnAddExpert">
               <button class="" (click)="onButtonClickAddExpert()" *ngIf="isAjouterVisible">ajouter une expertise</button>
               <div class="content_validerAddExpert" *ngIf="isMessageVisible">
-                <div>
+                <div  *ngFor="let item of expert">
                   <select name="" id="">
                     <option value="">Choisir une expertise</option>
                     <option value="">expertise 1</option>

@@ -76,3 +76,14 @@
   .modal-footer {
     gap: 1rem;
   }
+
+
+.spanpointer {
+  cursor: pointer;
+}
+
+.title_content_detail_expert{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #dbb807;
+}

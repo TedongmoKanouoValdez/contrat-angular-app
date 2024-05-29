@@ -1,0 +1,29 @@
+.container{
+    padding: 20px;
+    margin-top: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    
+}
+.title{
+    margin-left: 8%;
+    padding-top: 5%;
+}
+button{
+    background-color: rgb(55, 156, 196);
+    color: white;
+    border: none;
+    padding: 5%;
+    width: 55%;
+    border-radius: 5px;
+}
+input{
+    width: 80%;
+    padding: 2%;
+}
+.row{
+    margin-left: 3%;
+    padding: 1%;
+}
+
+

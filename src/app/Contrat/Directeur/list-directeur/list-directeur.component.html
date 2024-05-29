@@ -51,9 +51,20 @@
                       margin-right: 10px;
                       padding: 10px;
                     "
+                    (click)="goToCreateDirector($event)"
+                    [attr.data-name] = "'editDirecteur'"
+                    [attr.data-name]="'editDirecteur'"
+                    [attr.data-name]="director.name_directeur"
+                    [attr.data-id]="director.id_directeur"
+                    [attr.data-lastname]="director.lastname_directeur"
+                    [attr.data-company]="director.company"
+                    [attr.data-telephone]="director.telephone"
+
                     data-bs-toggle="modal"
                   ></i>
                   <i
+                  (click)="modalDirecteur(director.name, director.lastname, director.id_directeur)"
+
                     class="far fa-trash-alt"
                     data-bs-toggle="modal" data-bs-target="#btnSupprimer"
                     style="font-size: 24px; color: rgb(55, 156, 196)"
@@ -84,9 +95,19 @@
                       margin-right: 10px;
                       padding: 10px;
                     "
+
+                    (click)="goToCreateDirector($event)"
+                    [attr.data-name]="'editDirecteur'"
+                    [attr.data-code]="item.name_directeur"
+                    [attr.data-id]="item.id_directeur"
+                    [attr.data-lastname]="item.lastname_directeur"
+                    [attr.data-company]="item.company"
+                    [attr.data-telephone]="item.telephone"
+
                     data-bs-toggle="modal"
                   ></i>
                   <i
+                  (click)="modalDirecteur(item.name_directeur, item.lastname_directeur, item.id_directeur)"
                     class="far fa-trash-alt"
                     data-bs-toggle="modal" data-bs-target="#btnSupprimer"
                     style="font-size: 24px; color: rgb(55, 156, 196)"
@@ -106,15 +127,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title"></h5>
-          <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" (click)="closeModalDirecteur()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <input type="hidden" id="iddelete">
-          <p>Voulez-vous vraiment supprimer ce client? ?</p>
+          <p>Voulez-vous vraiment supprimer ce directeur? ?</p>
         </div>
         <div class="modal-footer">
-          <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary">supprimer</button>
+          <button type="button" (click)="closeModalDirecteur()"  class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" (click)="deleteDirecteur()" class="btn btn-primary">supprimer</button>
         </div>
       </div>
     </div>

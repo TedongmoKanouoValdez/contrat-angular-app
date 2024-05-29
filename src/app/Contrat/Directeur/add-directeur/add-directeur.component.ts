@@ -1,6 +1,7 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
 import { DirecteurService } from '../../ContratService/directeur.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-add-directeur',
@@ -14,6 +15,7 @@ export class AddDirecteurComponent implements OnInit {
     lastname_directeur: string;
     email: string;
     telephone: string;
+    company: string;
     parametre: string;
     parametreId: string;
     parametreIsTrue: string;
@@ -30,28 +32,33 @@ export class AddDirecteurComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  @ViewChild('titlePage', { static: true }) titlePage!: ElementRef;
+
+  @ViewChild('nameDirecteur', { static: true }) nameDirecteur!: ElementRef;
+  @ViewChild('lastnameDirecteur', { static: true }) lastnameDirecteur!: ElementRef;
+  @ViewChild('emailAdd', { static: true }) emailAdd!: ElementRef;
+  @ViewChild('telephoneAdd', { static: true }) telephoneAdd!: ElementRef;
+  @ViewChild('companyAdd', { static: true }) companyAdd!: ElementRef;
 
   ngAfterViewInit(){
+    this.route.queryParams.subscribe(params => {
+     this.parametre = params['name']
+    });
+    
     if(this.parametre) {
       const titlePage = document.querySelector('.titrePage');
 
-      this.renderer.setProperty(titlePage, 'innerText', 'Modifier un directeur');
+      this.titlePage.nativeElement.innerText = 'Modifier un directeur';
       const storedData = localStorage.getItem("userData");
-
-      if(storedData != null){
+      
+      if(storedData){
         const userData = JSON.parse(storedData);
-
-        const name_directeur = document.querySelector("#name_directeur") as HTMLInputElement;
-        const lastname_directeur = document.querySelector("#lastname_directeur") as HTMLInputElement;
-        const email = document.querySelector("#email") as HTMLInputElement;
-        const telephone = document.querySelector("#telephone") as HTMLInputElement;
-
-        name_directeur.value = userData.name_directeur;
-        lastname_directeur.value = userData.lastname_directeur;
-        email.value = userData.email;
-        telephone.value = userData.telephone;
-
-        console.log(userData);
+        console.log(this.nameDirecteur.nativeElement)
+        this.nameDirecteur.nativeElement.value = userData.name_directeur;
+        this.lastnameDirecteur.nativeElement.value = userData.lastname_directeur;
+        this.emailAdd.nativeElement.value = userData.email;
+        this.telephoneAdd.nativeElement.value = userData.telephone;
+        this.companyAdd.nativeElement.value = userData.company;
       }
     }
   }
@@ -65,8 +72,21 @@ export class AddDirecteurComponent implements OnInit {
     if(!this.lastname_directeur){
       this.errorMessage = "Le prenom est requis"
     }
+    if(!this.company){
+      this.errorMessage = "le nom de la societé est requise"
+    }
+    if(!this.telephone){
+      this.errorMessage = "le numero de telephone est requis"
+    }
     if(!this.emailPattern.test(this.email)) {
       this.errorMessage = 'Action echoué : L\'email doit etre au format @gmail.com';
+      return;
+    }
+
+    if (this.errorMessage) {
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 3000);
       return;
     }
 
@@ -78,7 +98,8 @@ export class AddDirecteurComponent implements OnInit {
         directeur.name_directeur === this.name_directeur &&
         directeur.lastname_directeur === this.lastname_directeur &&
         directeur.email === this.email &&
-        directeur.telephone === this.telephone
+        directeur.telephone === this.telephone &&
+        directeur.company === this.company
       );
 
       if (existingDirecteur) {
@@ -92,7 +113,8 @@ export class AddDirecteurComponent implements OnInit {
           Name_directeur: this.name_directeur,
           Lastname_directeur: this.lastname_directeur,
           Email: this.email,
-          Telephone: this.telephone
+          Telephone: this.telephone,
+          Company: this.company
         };
 
         this.directeurService.postDirecteur(directeurData).subscribe(
@@ -122,9 +144,10 @@ export class AddDirecteurComponent implements OnInit {
   updateDirecteur(): void {
     const storedData = localStorage.getItem("userData");
     const email = document.querySelector('#emailDirecteur') as HTMLInputElement;
-    const name_directeur = document.querySelector('#name_directeur') as HTMLInputElement;
-    const lastname_directeur = document.querySelector('#lastname_directeur') as HTMLInputElement;
+    const name_directeur = document.querySelector('#nameDirecteur') as HTMLInputElement;
+    const lastname_directeur = document.querySelector('#lastnameDirecteur') as HTMLInputElement;
     const telephone = document.querySelector('#telephone') as HTMLInputElement;
+    const company = document.querySelector("#company") as HTMLInputElement;
 
     // Vérification de l'email
     if (!this.emailPattern.test(email.value)) {
@@ -133,7 +156,7 @@ export class AddDirecteurComponent implements OnInit {
     }
 
     // Vérification des champs requis
-    if (!name_directeur.value || !lastname_directeur.value || !email.value || !telephone.value) {
+    if (!name_directeur.value || !lastname_directeur.value || !email.value || !telephone.value || !company.value) {
       this.errorMessage = "Tous les champs sont requis!";
       setTimeout(() => {
         this.errorMessage = null; // Réinitialiser le message d'erreur après 3 secondes (3000 millisecondes)
@@ -143,15 +166,17 @@ export class AddDirecteurComponent implements OnInit {
     
       if (storedData != null) {
         const userData = JSON.parse(storedData);
+          console.log(userData);
                
         const idDirecteur = document.querySelector('#idDirecteur') as HTMLInputElement;
       
-        const id = +idDirecteur.value; // ID de l'administrateur à mettre à jour
+        const id = +idDirecteur.value; 
         const data = {
           name_directeur: name_directeur.value,
           lastname_directeur: lastname_directeur.value,
           email: email.value,
-          telephone: telephone.value
+          telephone: telephone.value,
+          company: company.value,
         };
 
         this.directeurService.updateDirecteur(id, data)
@@ -173,7 +198,7 @@ export class AddDirecteurComponent implements OnInit {
   }
 
   goToListDirecteur(){
-    const link = ['/listeDirecteur'];
+    const link = ['/listDirecteur'];
     this.router.navigate(link);
   }
 }

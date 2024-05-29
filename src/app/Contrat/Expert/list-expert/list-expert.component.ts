@@ -13,6 +13,7 @@ export class ListExpertComponent implements OnInit {
   expert: any[] = [];
   expertise: any[] = [];
   selectedExpert: any; // Déclarez une variable pour stocker l'expert sélectionné
+  arrayDetailExpert: { id: string | null; name: string | null; prenon: string | null; expertise: string | null; email: string | null; telephone: string | null }[] = [];
 
   constructor(
     private router: Router,
@@ -49,8 +50,30 @@ export class ListExpertComponent implements OnInit {
     )
   }
 
-  DetailExpert(): void {
-    alert();
+  DetailExpert(event: Event): void {
+    const target = event.target as HTMLElement;
+    const dataName = target.getAttribute('data-name');
+    const dataPrenon = target.getAttribute('data-Prenon');
+    const dataExpertise = target.getAttribute('data-Expertise');
+    const dataEmail = target.getAttribute('data-Email');
+    const dataTelephone = target.getAttribute('data-Telephone');
+    const dataid = target.getAttribute('data-id');
+
+    const detail = {
+      id: dataid,
+      name: dataName,
+      prenon: dataPrenon,
+      expertise: dataExpertise,
+      email: dataEmail,
+      telephone: dataTelephone
+    };
+
+    this.arrayDetailExpert.push(detail);
+    // Stocker une valeur
+    localStorage.setItem('detailExpert', JSON.stringify(this.arrayDetailExpert));
+
+    const link = ['/expertDetail'];
+    this.router.navigate(link);
   }
 
   
@@ -58,5 +81,7 @@ export class ListExpertComponent implements OnInit {
     const link = ['/createExpert'];
     this.router.navigate(link);
   }
+
+ 
 
 }

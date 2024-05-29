@@ -12,6 +12,8 @@ export class AddExpertComponent implements OnInit {
   isMessageVisible: boolean = false;
   isAjouterVisible: boolean = true;
 
+  expert: any[] = [];
+
   constructor(
     private router: Router
   ) { }

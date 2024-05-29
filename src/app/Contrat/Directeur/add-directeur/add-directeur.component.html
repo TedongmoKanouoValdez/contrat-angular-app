@@ -1,0 +1,172 @@
+<div class="title">
+    <h1 #titlePage class="titrePage">Ajouter un directeur de projet</h1>
+</div>
+  
+  <section class="container">
+    <div class="row">
+      <!-- Bloc à gauche -->
+      <div class="col-md-6">
+        <div *ngIf="!parametre" class="element">
+          <div class="row">
+            <div class="col">
+              <span>Nom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="name_directeur" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Prenom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Prenom" [(ngModel)]="lastname_directeur" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Email*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email" />
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="parametre" class="element">
+          <input type="hidden" id="idDirecteur" [value]="parametreId">
+          <div class="row">
+            <div class="col">
+              <span>Nom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" #nameDirecteur id="nameDirecteur" class="nameDirecteur form-control" placeholder="Nom" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span>Prenom*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" #lastnameDirecteur id="lastnameDirecteur" class="lastnameDirecteur form-control" placeholder="Prenom" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <span>Email*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text"  #emailAdd id="email" class="emailAdd form-control" placeholder="Email" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Bloc à droite -->
+      <div class="col-md-6" *ngIf="!parametre">
+        <div class="element">
+          <div class="row">
+            <div class="col">
+              <span>Societé*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Societé" [(ngModel)]="company"/>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col">
+              <span>Telephone*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="telephone" [(ngModel)]="telephone" />
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col">
+              <span>Mot de passe*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="password" class="form-control" placeholder="Mot de passe"  />
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="parametre">
+        <div class="element">
+          <div class="row">
+            <div class="col">
+              <span>Societé *</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="text" #companyAdd id="company" class="companyAdd form-control" placeholder="company" />
+            </div>
+          </div>
+            <div class="row">
+              <div class="col">
+                <span>Telephone *</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input type="text" #telephoneAdd id="telephone" class="telephoneAdd form-control" placeholder="telephone" />
+              </div>
+            </div>
+          <!-- <div class="row">
+            <div class="col">
+              <span>Mot de passe*</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="password" class="form-control" placeholder="Mot de passe"  />
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger" style="margin-top: 1%; margin-left: 8%; margin-right: 50%" role="alert">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success" style="margin-top: 2%; margin-left: 8%; margin-right: 39%" role="alert">
+      {{ successMessage }}
+    </div>
+  
+    <hr style="margin-top: 15%; margin-left: 8%; margin-right: 8%" />
+    <div class="row" style="margin-left: 7%; margin-top: 6%; margin-bottom: 5%;">
+        <div class="col">
+            <button (click)="goToListDirecteur()">Annuler</button>
+        </div>
+        <div class="col" *ngIf="!parametre" style="padding-left: 55%;">
+            <button (click)="createDirecteur()" >Ajouter</button>
+       </div>
+       <div class="col" *ngIf="parametre" style="padding-left: 55%;">
+          <button (click)="updateDirecteur()">Modifier</button>
+      </div>
+    </div>
+
+  </section>
+  

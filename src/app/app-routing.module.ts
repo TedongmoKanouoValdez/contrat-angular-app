@@ -10,6 +10,7 @@ import { ListExpertComponent } from './Contrat/Expert/list-expert/list-expert.co
 import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.component';
 import { AddDirecteurComponent } from './Contrat/Directeur/add-directeur/add-directeur.component';
 import { ListDirecteurComponent } from './Contrat/Directeur/list-directeur/list-directeur.component';
+import {ExpertDetailsComponent} from './Contrat/Expert/expert-details/expert-details.component';
 
 const routes: Routes = [
   {path: 'famillies', component: ListFamillyComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'createExpert', component: AddExpertComponent},
   {path: 'createDirector', component: AddDirecteurComponent},
   {path: 'listDirecteur', component: ListDirecteurComponent},
+  {path: 'expertDetail', component: ExpertDetailsComponent},
   // {path: '', redirectTo: 'famillies', pathMatch: 'full'}
 ];
 
