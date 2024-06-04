@@ -52,21 +52,26 @@
             <div class="content_btnAddExpert">
               <button class="" (click)="onButtonClickAddExpert()" *ngIf="isAjouterVisible">ajouter une expertise</button>
               <div class="content_validerAddExpert" *ngIf="isMessageVisible">
-                <div  *ngFor="let item of expert">
-                  <select name="" id="">
-                    <option value="">Choisir une expertise</option>
-                    <option value="">expertise 1</option>
-                    <option value="">expertise 2</option>
-                    <option value="">expertise 3</option>
-                    <option value="">expertise 4</option>
+                <div>
+                  <select name="" id="" (change)="onExpertChange($event)">
+                    <option value="none">Choisir une expertise</option>
+                    <option *ngFor="let item of expert" [value]="item.id_expertise">
+                      {{item.expertise}}
+                    </option>
                   </select>
+                </div>
+                <div *ngIf="isDetailsVisible" class="div_alert alert alert-danger d-flex align-items-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                  <div class="content_alert">
+                    Veuillez choisir une expertise
+                  </div>
                 </div>
                 <div class="content_twoBtnAddExpert">
                   <div>
-                    <button type="button" class="">Annuler</button>
+                    <button type="button" (click)="endChoix($event)" class="">Annuler</button>
                   </div>
                   <div>
-                    <button type="button" class="">Valider</button>
+                    <button type="button" (click)="validerChoix($event)" class="">Valider</button>
                   </div>
                 </div>
               </div>

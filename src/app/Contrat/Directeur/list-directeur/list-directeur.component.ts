@@ -55,13 +55,17 @@ export class ListDirecteurComponent implements OnInit {
     const dataCompany = target.getAttribute('data-company');
     const dataTelephone  = target.getAttribute('data-telephone');
     const dataId = target.getAttribute('data-id');
+    const datacode = target.getAttribute('data-code');
+    const dataemail = target.getAttribute('data-email');
 
     if(dataName == 'editDirecteur' && dataLastname != null && dataId != null){
 
       const userDate = {
         userName: dataName,
         userLastname: dataLastname,
+        userNameEx: datacode,
         userCompany: dataCompany,
+        useremail: dataemail,
         userTelephone: dataTelephone
       };
 

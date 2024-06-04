@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
 import { DirecteurService } from '../../ContratService/directeur.service';
 import { Console } from 'console';
@@ -16,7 +16,7 @@ export class AddDirecteurComponent implements OnInit {
     email: string;
     telephone: string;
     company: string;
-    parametre: string;
+    parametre: string | null = null;
     parametreId: string;
     parametreIsTrue: string;
     
@@ -26,39 +26,42 @@ export class AddDirecteurComponent implements OnInit {
     private router: Router,
     private directeurService: DirecteurService,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-
+    this.route.queryParams.subscribe(params => {
+      this.parametre = params['name'];
+      // Déclencher une nouvelle vérification des modifications
+      this.cdr.detectChanges();
+    });
   }
   @ViewChild('titlePage', { static: true }) titlePage!: ElementRef;
 
-  @ViewChild('nameDirecteur', { static: true }) nameDirecteur!: ElementRef;
-  @ViewChild('lastnameDirecteur', { static: true }) lastnameDirecteur!: ElementRef;
-  @ViewChild('emailAdd', { static: true }) emailAdd!: ElementRef;
-  @ViewChild('telephoneAdd', { static: true }) telephoneAdd!: ElementRef;
-  @ViewChild('companyAdd', { static: true }) companyAdd!: ElementRef;
-
   ngAfterViewInit(){
-    this.route.queryParams.subscribe(params => {
-     this.parametre = params['name']
-    });
-    
+
+    // console.log( this.nameDirecteur.nativeElement)
     if(this.parametre) {
       const titlePage = document.querySelector('.titrePage');
 
       this.titlePage.nativeElement.innerText = 'Modifier un directeur';
       const storedData = localStorage.getItem("userData");
       
+      const nameDirecteur = document.querySelector('#nameDirecteur') as HTMLInputElement;
+      const lastnameDirecteur = document.querySelector('#lastnameDirecteur') as HTMLInputElement;
+      const email = document.querySelector('#email') as HTMLInputElement;
+      const companyAdd = document.querySelector('#companyAdd') as HTMLInputElement;
+      const telephone = document.querySelector('#telephone') as HTMLInputElement;
       if(storedData){
+        // console.log(this.nameDirecteur)
         const userData = JSON.parse(storedData);
-        console.log(this.nameDirecteur.nativeElement)
-        this.nameDirecteur.nativeElement.value = userData.name_directeur;
-        this.lastnameDirecteur.nativeElement.value = userData.lastname_directeur;
-        this.emailAdd.nativeElement.value = userData.email;
-        this.telephoneAdd.nativeElement.value = userData.telephone;
-        this.companyAdd.nativeElement.value = userData.company;
+        console.log(userData)
+        nameDirecteur.value = userData.userNameEx;
+        lastnameDirecteur.value = userData.userLastname;
+        email.value = userData.useremail;
+        companyAdd.value = userData.userCompany;
+        telephone.value = userData.userTelephone;
       }
     }
   }

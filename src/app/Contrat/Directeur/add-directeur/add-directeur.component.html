@@ -39,8 +39,8 @@
           </div>
         </div>
 
-        <div *ngIf="parametre" class="element">
-          <input type="hidden" id="idDirecteur" [value]="parametreId">
+        <div *ngIf="parametre" class="element content_parametre">
+          <input type="hidden" id="idDirecteur" [value]="parametre">
           <div class="row">
             <div class="col">
               <span>Nom*</span>
@@ -111,7 +111,7 @@
           </div> -->
         </div>
       </div>
-      <div class="col-md-6" *ngIf="parametre">
+      <div class="col-md-6 {{parametre}}" *ngIf="parametre">
         <div class="element">
           <div class="row">
             <div class="col">
@@ -120,7 +120,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <input type="text" #companyAdd id="company" class="companyAdd form-control" placeholder="company" />
+              <input type="text" #companyAdd id="companyAdd" class="companyAdd form-control" placeholder="company" />
             </div>
           </div>
             <div class="row">
