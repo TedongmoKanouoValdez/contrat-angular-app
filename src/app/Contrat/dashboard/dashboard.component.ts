@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  template: `
-    <p>
-      dashboard works!
-    </p>
-  `,
+  templateUrl:'./dashboard.component.html',
   styles: [
   ]
 })

@@ -48,20 +48,24 @@ export class AddDirecteurComponent implements OnInit {
       this.titlePage.nativeElement.innerText = 'Modifier un directeur';
       const storedData = localStorage.getItem("userData");
       
-      const nameDirecteur = document.querySelector('#nameDirecteur') as HTMLInputElement;
-      const lastnameDirecteur = document.querySelector('#lastnameDirecteur') as HTMLInputElement;
-      const email = document.querySelector('#email') as HTMLInputElement;
-      const companyAdd = document.querySelector('#companyAdd') as HTMLInputElement;
-      const telephone = document.querySelector('#telephone') as HTMLInputElement;
+      const nameDirecteur = document.querySelector('#nameDirecteur') as HTMLInputElement | null;
+      const lastnameDirecteur = document.querySelector('#lastnameDirecteur') as HTMLInputElement | null;
+      const email = document.querySelector('#email') as HTMLInputElement | null;
+      const companyAdd = document.querySelector('#companyAdd') as HTMLInputElement | null;
+      const telephone = document.querySelector('#telephone') as HTMLInputElement ;
       if(storedData){
         // console.log(this.nameDirecteur)
         const userData = JSON.parse(storedData);
         console.log(userData)
-        nameDirecteur.value = userData.userNameEx;
-        lastnameDirecteur.value = userData.userLastname;
-        email.value = userData.useremail;
-        companyAdd.value = userData.userCompany;
-        telephone.value = userData.userTelephone;
+        if (nameDirecteur && lastnameDirecteur && email && companyAdd && telephone) {
+          nameDirecteur.value = userData.userNameEx;
+          lastnameDirecteur.value = userData.userLastname;
+          email.value = userData.useremail;
+          companyAdd.value = userData.userCompany;
+          telephone.value = userData.userTelephone;
+      } else {
+          console.error('Un ou plusieurs éléments n\'ont pas été trouvés dans le DOM.');
+      }
       }
     }
   }
@@ -144,28 +148,30 @@ export class AddDirecteurComponent implements OnInit {
   }
 
 
+
   updateDirecteur(): void {
     const storedData = localStorage.getItem("userData");
-    const email = document.querySelector('#emailDirecteur') as HTMLInputElement;
-    const name_directeur = document.querySelector('#nameDirecteur') as HTMLInputElement;
-    const lastname_directeur = document.querySelector('#lastnameDirecteur') as HTMLInputElement;
-    const telephone = document.querySelector('#telephone') as HTMLInputElement;
-    const company = document.querySelector("#company") as HTMLInputElement;
+    const email = document.querySelector('#emailDirecteur') as HTMLInputElement | null;
+    const name_directeur = document.querySelector('#nameDirecteur') as HTMLInputElement | null;
+    const lastname_directeur = document.querySelector('#lastnameDirecteur') as HTMLInputElement | null;
+    const telephone = document.querySelector('#telephone') as HTMLInputElement | null;
+    const company = document.querySelector("#company") as HTMLInputElement | null;
+
+    // Vérification des éléments
+    if (!email || !name_directeur || !lastname_directeur || !telephone || !company) {
+        this.errorMessage = "Tous les champs sont requis!";
+        setTimeout(() => {
+            this.errorMessage = null;
+        }, 3000);
+        return;
+    }
 
     // Vérification de l'email
     if (!this.emailPattern.test(email.value)) {
-      this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
-      return;
+        this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
+        return;
     }
-
-    // Vérification des champs requis
-    if (!name_directeur.value || !lastname_directeur.value || !email.value || !telephone.value || !company.value) {
-      this.errorMessage = "Tous les champs sont requis!";
-      setTimeout(() => {
-        this.errorMessage = null; // Réinitialiser le message d'erreur après 3 secondes (3000 millisecondes)
-      }, 3000);
-      return;
-    }
+  
     
       if (storedData != null) {
         const userData = JSON.parse(storedData);
@@ -199,12 +205,14 @@ export class AddDirecteurComponent implements OnInit {
           );
       }
   }
-
   goToListDirecteur(){
     const link = ['/listDirecteur'];
     this.router.navigate(link);
   }
+  
+ 
 }
+
 
 
 

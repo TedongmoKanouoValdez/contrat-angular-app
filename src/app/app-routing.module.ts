@@ -11,8 +11,11 @@ import { AddExpertComponent } from './Contrat/Expert/add-expert/add-expert.compo
 import { AddDirecteurComponent } from './Contrat/Directeur/add-directeur/add-directeur.component';
 import { ListDirecteurComponent } from './Contrat/Directeur/list-directeur/list-directeur.component';
 import {ExpertDetailsComponent} from './Contrat/Expert/expert-details/expert-details.component';
+import { DashboardComponent } from './Contrat/dashboard/dashboard.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'famillies', component: ListFamillyComponent},
   {path: 'familly', component: AddFamillyComponent},
   {path: 'listAdmin', component: ListAdministratorComponent},
@@ -24,7 +27,7 @@ const routes: Routes = [
   {path: 'createDirector', component: AddDirecteurComponent},
   {path: 'listDirecteur', component: ListDirecteurComponent},
   {path: 'expertDetail', component: ExpertDetailsComponent},
-  // {path: '', redirectTo: 'famillies', pathMatch: 'full'}
+  
 ];
 
 @NgModule({

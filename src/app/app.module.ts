@@ -18,6 +18,7 @@ import { AddDirecteurComponent } from './Contrat/Directeur/add-directeur/add-dir
 import { ListDirecteurComponent } from './Contrat/Directeur/list-directeur/list-directeur.component';
 import { SidenavComponent } from './Contrat/sidenav/sidenav.component';
 import { DashboardComponent } from './Contrat/dashboard/dashboard.component';
+import { BodyComponent } from './Contrat/body/body.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DashboardComponent } from './Contrat/dashboard/dashboard.component';
     AddDirecteurComponent,
     ListDirecteurComponent,
     SidenavComponent,
-    DashboardComponent
+    DashboardComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,
