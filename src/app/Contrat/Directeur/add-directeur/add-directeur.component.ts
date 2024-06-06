@@ -36,6 +36,12 @@ export class AddDirecteurComponent implements OnInit {
       // Déclencher une nouvelle vérification des modifications
       this.cdr.detectChanges();
     });
+
+    this.route.queryParams.subscribe(params => {
+      this.parametreId = params['edit'];
+      // Déclencher une nouvelle vérification des modifications
+      this.cdr.detectChanges();
+    });
   }
   @ViewChild('titlePage', { static: true }) titlePage!: ElementRef;
 
@@ -151,14 +157,14 @@ export class AddDirecteurComponent implements OnInit {
 
   updateDirecteur(): void {
     const storedData = localStorage.getItem("userData");
-    const email = document.querySelector('#emailDirecteur') as HTMLInputElement | null;
-    const name_directeur = document.querySelector('#nameDirecteur') as HTMLInputElement | null;
-    const lastname_directeur = document.querySelector('#lastnameDirecteur') as HTMLInputElement | null;
-    const telephone = document.querySelector('#telephone') as HTMLInputElement | null;
-    const company = document.querySelector("#company") as HTMLInputElement | null;
-
+    const emailUpdate = document.querySelector('#email') as HTMLInputElement | null;
+    const name_directeurUpdate = document.querySelector('#nameDirecteur') as HTMLInputElement | null;
+    const lastname_directeurUpdate = document.querySelector('#lastnameDirecteur') as HTMLInputElement | null;
+    const telephoneUpdate = document.querySelector('#telephone') as HTMLInputElement | null;
+    const companyUpdate = document.querySelector("#companyAdd") as HTMLInputElement | null;
+    console.log(emailUpdate?.value)
     // Vérification des éléments
-    if (!email || !name_directeur || !lastname_directeur || !telephone || !company) {
+    if (name_directeurUpdate?.value == "" || lastname_directeurUpdate?.value == "" || telephoneUpdate?.value == "" || companyUpdate?.value == "") {
         this.errorMessage = "Tous les champs sont requis!";
         setTimeout(() => {
             this.errorMessage = null;
@@ -167,10 +173,10 @@ export class AddDirecteurComponent implements OnInit {
     }
 
     // Vérification de l'email
-    if (!this.emailPattern.test(email.value)) {
-        this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
-        return;
-    }
+    // if (!this.emailPattern.test(emailUpdate.value)) {
+    //     this.errorMessage = 'Action échouée : l\'email doit être au format @gmail.com.';
+    //     return;
+    // }
   
     
       if (storedData != null) {
@@ -181,13 +187,13 @@ export class AddDirecteurComponent implements OnInit {
       
         const id = +idDirecteur.value; 
         const data = {
-          name_directeur: name_directeur.value,
-          lastname_directeur: lastname_directeur.value,
-          email: email.value,
-          telephone: telephone.value,
-          company: company.value,
+          name_directeur: name_directeurUpdate?.value,
+          lastname_directeur: lastname_directeurUpdate?.value,
+          email: emailUpdate?.value,
+          telephone: telephoneUpdate?.value,
+          company: companyUpdate?.value,
         };
-
+        console.log(id)
         this.directeurService.updateDirecteur(id, data)
           .subscribe(
             (response) => {

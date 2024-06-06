@@ -13,6 +13,7 @@ interface SideNavToggle{
 export class AppComponent {
  
   title='sidenav';
+  isVisible: boolean = false;
 
   isSideNavCollapsed = false;
   screenWidth = 0;
@@ -21,4 +22,9 @@ export class AppComponent {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+  }
+  
 }

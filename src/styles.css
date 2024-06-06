@@ -14,6 +14,84 @@
 body {
     position: relative;
     font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa!important;
+    overflow-y: hidden!important;
+}
+
+.custom-section {background-color: #fff!important; height: 28rem; overflow-y: scroll;}
+
+table {
+    margin-top: 66px!important;
+}
+
+form.ng-untouched.ng-pristine.ng-valid {
+    position: fixed;
+    width: 55rem;
+    background-color: #fff;
+}
+
+.contentbody {
+    display: flex;
+    flex-direction: row;
+}
+
+.footercontent {
+    position: fixed;left: 0;top: 40rem;width: 100%;text-align: center;background: #263238;height: 100%;color: #fff;
+}
+
+.headercontent {
+    position: fixed;left: 0;top: 0;width: 100%;text-align: center;background: #fff;height: 6.5%;color: #000;z-index: 9;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footercontenttitle {
+    display: flex;
+    justify-content: center;
+    height: 4rem;
+    align-items: center;
+}
+.headercontenttitle {
+    display: flex;
+    justify-content: end;
+    height: 2.2rem;
+    align-items: end;
+    padding-right: 2rem;
+}
+
+.titleheader {
+    cursor: pointer;
+}
+
+.contentdisconn{
+    position: relative;
+}
+
+.contentdisconnbtn {
+    position: absolute;
+    right: 0.5rem;
+    top: 1rem;
+}
+
+.contentdisconnbtn button {
+    border: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    background: #263238;
+    color: #fff;
+    border-radius: 0 0 10px 10px;;
+}
+
+.body {
+    padding-top: 0rem!important;
+}
+
+.maincontent{
+    width: 100%;
+}
+
+.navbarcontent{
+    width: 1rem;
 }
 
 .card {
