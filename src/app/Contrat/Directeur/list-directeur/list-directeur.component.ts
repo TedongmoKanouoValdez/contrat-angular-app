@@ -132,4 +132,11 @@ export class ListDirecteurComponent implements OnInit {
       }
     );
   }
+
+  goToAddDirector(){
+    const link = ['/createDirector'];
+    this.router.navigate(link);
+  }
 }
+
+

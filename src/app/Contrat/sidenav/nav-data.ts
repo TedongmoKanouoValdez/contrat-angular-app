@@ -26,4 +26,9 @@ export const navbarData = [
         icon: 'fal fa-file',
         label: 'Expert'
     },
+    {
+        RouteLink: 'listDirecteur',
+        icon: 'fal fa-file',
+        label: 'Expert'
+    },
 ];
