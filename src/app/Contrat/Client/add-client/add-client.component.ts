@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ClientService } from '../../ContratService/client.service';
-import { ActivatedRoute ,Router} from '@angular/router';
+import { ActivatedRoute ,Router, NavigationEnd } from '@angular/router';
+import { DomManipulationService } from '../../dom-manipulation.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-client',
@@ -17,17 +19,35 @@ export class AddClientComponent implements OnInit {
   parametre: string;
   parametreId: string;
   parametreIsTrue: string;
+  arrayUrl: string[];
 
   constructor(
     private router: Router,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private renderer: Renderer2
-  ) { }
+    private renderer: Renderer2,
+    private domManipulationService: DomManipulationService
+  ) { this.arrayUrl = ['/createClient', '/familly', '/createAdmin', '/createExpert', '/createDirector']; }
 
   ngOnInit(): void {
     this.parametreId = this.route.snapshot.queryParams['edit'] || undefined;
     this.parametre = this.route.snapshot.queryParams['name'] || undefined;
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const currentUrl = this.router.url;
+      this.checkAndSetNavbarWidth(currentUrl);
+    });
+
+    // Check the URL initially when the component is loaded
+    this.checkAndSetNavbarWidth(this.router.url);
+
+  }
+
+  private checkAndSetNavbarWidth(currentUrl: string): void {
+    const navbarWidth = this.arrayUrl.includes(currentUrl) ? '13rem' : '1rem';
+    this.domManipulationService.setNavbarWidth('.navbarcontent', navbarWidth);
   }
 
   ngAfterViewInit(): void {

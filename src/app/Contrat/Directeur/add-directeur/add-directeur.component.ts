@@ -1,7 +1,9 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute ,Router} from '@angular/router';
+import { ActivatedRoute ,Router, NavigationEnd } from '@angular/router';
 import { DirecteurService } from '../../ContratService/directeur.service';
 import { Console } from 'console';
+import { DomManipulationService } from '../../dom-manipulation.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-directeur',
@@ -19,6 +21,7 @@ export class AddDirecteurComponent implements OnInit {
     parametre: string | null = null;
     parametreId: string;
     parametreIsTrue: string;
+    arrayUrl: string[];
     
     emailPattern: RegExp = /\b[A-Za-z0-9._%+-]+@gmail\.com\b/;
 
@@ -27,8 +30,9 @@ export class AddDirecteurComponent implements OnInit {
     private directeurService: DirecteurService,
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private cdr: ChangeDetectorRef
-  ) { }
+    private cdr: ChangeDetectorRef,
+    private domManipulationService: DomManipulationService
+  ) { this.arrayUrl = ['/createClient', '/familly', '/createAdmin', '/createExpert', '/createDirector']; }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -42,8 +46,24 @@ export class AddDirecteurComponent implements OnInit {
       // Déclencher une nouvelle vérification des modifications
       this.cdr.detectChanges();
     });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const currentUrl = this.router.url;
+      this.checkAndSetNavbarWidth(currentUrl);
+    });
+
+    // Check the URL initially when the component is loaded
+    this.checkAndSetNavbarWidth(this.router.url);
   }
   @ViewChild('titlePage', { static: true }) titlePage!: ElementRef;
+
+
+  private checkAndSetNavbarWidth(currentUrl: string): void {
+    const navbarWidth = this.arrayUrl.includes(currentUrl) ? '13rem' : '1rem';
+    this.domManipulationService.setNavbarWidth('.navbarcontent', navbarWidth);
+  }
 
   ngAfterViewInit(){
 

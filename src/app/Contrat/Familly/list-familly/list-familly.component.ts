@@ -67,7 +67,7 @@ export class ListFamillyComponent implements OnInit {
         'name': editName
        } // Remplacez 'parametre' et 'valeur' par vos propres paramètres
     };
-    const link = ['/contrats'];
+    const link = ['/familly'];
     this.router.navigate(link, navigationExtras);
   }
 

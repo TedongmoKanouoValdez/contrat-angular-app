@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { ExpertService } from '../../ContratService/expert.service';
+import { DomManipulationService } from '../../dom-manipulation.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-expert',
@@ -14,19 +16,35 @@ export class AddExpertComponent implements OnInit {
   isAjouterVisible: boolean = true;
   selectedExpertId: number | null = null;
   isDetailsVisible: boolean = false;
+  arrayUrl: string[];
 
   expert: any[] = [];
   expertise: any[] = [];
 
   constructor(
     private router: Router,
-    private expertService: ExpertService
-  ) { }
+    private expertService: ExpertService,
+    private domManipulationService: DomManipulationService
+  ) { this.arrayUrl = ['/createClient', '/familly', '/createAdmin', '/createExpert', '/createDirector']; }
 
   ngOnInit(): void {
     this.getListExpert();
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const currentUrl = this.router.url;
+      this.checkAndSetNavbarWidth(currentUrl);
+    });
+
+    // Check the URL initially when the component is loaded
+    this.checkAndSetNavbarWidth(this.router.url);
   }
 
+  private checkAndSetNavbarWidth(currentUrl: string): void {
+    const navbarWidth = this.arrayUrl.includes(currentUrl) ? '13rem' : '1rem';
+    this.domManipulationService.setNavbarWidth('.navbarcontent', navbarWidth);
+  }
 
   getListExpert(){
     this.expertService.getExpert().subscribe(
