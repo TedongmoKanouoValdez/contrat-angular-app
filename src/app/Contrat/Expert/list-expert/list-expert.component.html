@@ -32,7 +32,7 @@
               <td><span (click)="DetailExpert($event)" class="spanpointer" [attr.data-id]="item.Id_expertise" [attr.data-name]="item.name_expert" [attr.data-Prenon]="item.lastname" [attr.data-Expertise]="item.expertise" [attr.data-Email]="item.email" [attr.data-Telephone]="item.telephone"  style="color: rgb(55, 156, 196);">{{item.name_expert}} {{item.lastname}}</span></td>
               <td>{{item.expertise}}</td>
               <td>{{item.email}}</td>
-              <td><span style="color: rgb(55, 156, 196);cursor: pointer;" (click)="modalDirecteur()">1 contrat</span></td>
+              <td><span style="color: rgb(55, 156, 196);cursor: pointer;" (click)="modalExpert()">1 contrat</span></td>
               <td
                 style="
                   text-align: right;
@@ -111,7 +111,7 @@
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 2px solid #c8c2c2; padding-bottom: 1rem;">
           <h5 class="modal-title">Name User</h5>
-          <button type="button" class="btn-close" (click)="closeModalDirecteur()" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" (click)="closeModalExpert()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="margin-bottom: 3rem;">
           <div>

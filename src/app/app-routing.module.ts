@@ -14,7 +14,7 @@ import {ExpertDetailsComponent} from './Contrat/Expert/expert-details/expert-det
 import { DashboardComponent } from './Contrat/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  // {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'famillies', component: ListFamillyComponent},
   {path: 'familly', component: AddFamillyComponent},

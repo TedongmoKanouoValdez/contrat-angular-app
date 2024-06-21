@@ -82,14 +82,14 @@ export class ListExpertComponent implements OnInit {
     this.router.navigate(link);
   }
 
-  closeModalDirecteur(){
+  closeModalExpert(){
     const overlay = document.querySelector('.overlay') as HTMLInputElement;
      if (overlay) {
       overlay.style.display = "none";
      }
   }
 
-  modalDirecteur(){
+  modalExpert(){
     const overlay = document.querySelector('.overlay') as HTMLInputElement;
 
     if(overlay) {
