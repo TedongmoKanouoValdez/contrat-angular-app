@@ -14,7 +14,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Nom" />
+            <input type="text" [(ngModel)]="name_expert" class="form-control" placeholder="Nom" />
           </div>
         </div>
         <div class="row">
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Prenom" />
+            <input type="text" [(ngModel)]="lastname" class="form-control" placeholder="Prenom" />
           </div>
         </div>
         <div class="row">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Email" />
+            <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" />
           </div>
         </div>
 
@@ -54,8 +54,8 @@
               <div class="content_validerAddExpert" *ngIf="isMessageVisible">
                 <div>
                   <select name="" id="" (change)="onExpertChange($event)">
-                    <option value="none">Choisir une expertise</option>
-                    <option *ngFor="let item of expert" [value]="item.id_expertise">
+                    <option value="none" selected>Choisir une expertise</option>
+                    <option *ngFor="let item of expert" data-i="selectedExpertId" [selected]="this.selectedExpertId === item.expertise" [value]="item.expertise">
                       {{item.expertise}}
                     </option>
                   </select>
@@ -132,7 +132,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="societe" />
+            <input type="text" [(ngModel)]="company" class="form-control" placeholder="societe" />
           </div>
         </div>
         <div class="row">
@@ -145,6 +145,7 @@
             <input
               type="text"
               class="form-control"
+              [(ngModel)]="telephone"
               placeholder="Numero de telephone"
             />
           </div>
@@ -193,7 +194,7 @@
       <button (click)="goToListExpert()">Annuler</button>
     </div>
     <div class="col" style="padding-left: 55%">
-      <button (click)="goToListExpert()">Ajouter</button>
+      <button (click)="addExpert()">Ajouter</button>
     </div>
   </div>
 </section>
