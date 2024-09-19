@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class ExpertService {
   apiUrl = 'https://localhost:7036/api/Expert';
 
   apiUrlGet1 = 'https://localhost:7036/api/Expertise';
+
+  apiUrlExpertId = 'https://localhost:7036/api/Expertise';
 
 
   constructor(private http: HttpClient) { }
@@ -22,9 +25,18 @@ export class ExpertService {
     return this.http.get<any[]>(this.apiUrlGet1);
   }
 
-  postExpert(expertData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, expertData)
+  getExpertiseid(): Observable <any[]> {
+    return this.http.get<any[]>(this.apiUrlExpertId);
   }
+
+  postExpert(expertData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, expertData, {
+       headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+       })
+    });
+ }
+ 
 
   deleteExpert(expertId: number): Observable<any> {
     const url = `${this.apiUrl}/${expertId}`;

@@ -55,8 +55,8 @@
                 <div>
                   <select name="" id="" (change)="onExpertChange($event)">
                     <option value="none" selected>Choisir une expertise</option>
-                    <option *ngFor="let item of expert" data-i="selectedExpertId" [selected]="this.selectedExpertId === item.expertise" [value]="item.expertise">
-                      {{item.expertise}}
+                    <option *ngFor="let item of listeidespert" #idExpert [attr.data-id]="item.id_expertise" [value]="item.name_expertise">
+                      {{item.name_expertise}}
                     </option>
                   </select>
                 </div>

@@ -25,12 +25,14 @@ export class AddExpertComponent implements OnInit {
   isMessageVisible: boolean = false;
   isAjouterVisible: boolean = true;
   selectedExpertId: string | null = null;
+  selectedExpert: string | null = null;
   isDetailsVisible: boolean = false;
   arrayUrl: string[];
 
   emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   expert: any[] = [];
+  listeidespert: any[] = [];
   expertise: any[] = [];
 
   constructor(
@@ -76,6 +78,16 @@ export class AddExpertComponent implements OnInit {
         console.log("erreur", error);
       }
     );
+
+    this.expertService.getExpertiseid().subscribe(
+      (listeidespert) => {
+        this.listeidespert = listeidespert;
+        console.log(this.listeidespert);
+      },
+      (error) => {
+        console.log("erreur", error);
+      }
+    );
   }
 
   toggleExpertiseForm() {
@@ -108,7 +120,14 @@ export class AddExpertComponent implements OnInit {
 
   onExpertChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
+    // Récupérer l'option sélectionnée
+    const selectedOption = selectElement.selectedOptions[0]; // La première option sélectionnée (s'il y en a plusieurs)
+    
+    // Récupérer l'attribut data-id de l'option sélectionnée
+    const selectedDataId = selectedOption.getAttribute('data-id');
+    
     this.selectedExpertId = selectElement.value;
+    this.selectedExpert = selectedDataId;
     if (!this.selectedExpertId) {
       this.isDetailsVisible = false;
     }
@@ -129,6 +148,7 @@ export class AddExpertComponent implements OnInit {
         this.selectedExpertId === "none"
       ) {
         this.selectedExpertId = this.selectedExpertId;
+        this.selectedExpert = this.selectedExpert;
         console.log("Selected expert ID:", this.selectedExpertId);
       } else {
         this.selectedExpertId = this.selectedExpertId;
@@ -170,12 +190,6 @@ export class AddExpertComponent implements OnInit {
     if (!this.selectedExpertId) {
       this.errorMessage = "le nom de la societé est requise";
     }
-    console.log(this.name_expert);
-    console.log(this.lastname);
-    console.log(this.email);
-    console.log(this.telephone);
-    console.log(this.selectedExpertId);
-    console.log(this.company);
 
     if (this.errorMessage) {
       setTimeout(() => {
@@ -184,23 +198,33 @@ export class AddExpertComponent implements OnInit {
       return;
     }
     const newExpert = {
-      name_expert: this.name_expert,
-      lastname: this.lastname,
-      email: this.email,
-      telephone: this.telephone,
-      company: this.company,
-      id_expertise: this.selectedExpertId // On envoie uniquement l'ID de l'expertise
+      name_expert: this.name_expert,  // Correspond au nom de propriété attendu
+      lastname: this.lastname,        // Correspond au nom de propriété attendu
+      email: this.email,              // Correspond au nom de propriété attendu
+      telephone: this.telephone,      // Correspond au nom de propriété attendu
+      company: this.company,          // Correspond au nom de propriété attendu
+      id_expertise: Number(this.selectedExpert),  // Assurez-vous que c'est un nombre
+      expertise: {
+        id_expertise: Number(this.selectedExpert),
+        name_expertise: this.selectedExpertId
+      }  // Correspond au nom de propriété attendu
     };
-
+    
+    console.log('Données envoyées au serveur :', JSON.stringify(newExpert, null, 2));
+    
     this.expertService.postExpert(newExpert).subscribe(
       (response) => {
         this.successMessage = 'Expert ajouté avec succès !';
         this.errorMessage = null;
+        setTimeout(() => {
+          this.goToListExpert();
+        }, 2000);
       },
       (error) => {
+        console.error('Erreur côté serveur:', error.message, error.error);
         this.errorMessage = 'Erreur lors de l\'ajout de l\'expert';
         this.successMessage = '';
       }
-    );
+    );        
   }
 }
